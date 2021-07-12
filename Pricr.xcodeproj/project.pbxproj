@@ -3,19 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253C959EFFE46D9B702A52EA /* Pods_Pricr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159F23A3714998FA3F6DBBCB /* Pods_Pricr.framework */; };
+		3585A68E0BC3A437C6F70664 /* Pods_PricrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */; };
+		5D45ECBCBA410520AEF97884 /* Pods_Pricr_PricrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */; };
 		F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0392269C9FFA00844377 /* AppDelegate.m */; };
 		F9CC0396269C9FFA00844377 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0395269C9FFA00844377 /* SceneDelegate.m */; };
-		F9CC0399269C9FFA00844377 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0398269C9FFA00844377 /* ViewController.m */; };
+		F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0398269C9FFA00844377 /* LoginViewController.m */; };
 		F9CC039C269C9FFA00844377 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CC039A269C9FFA00844377 /* Main.storyboard */; };
 		F9CC039E269C9FFB00844377 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9CC039D269C9FFB00844377 /* Assets.xcassets */; };
 		F9CC03A1269C9FFB00844377 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CC039F269C9FFB00844377 /* LaunchScreen.storyboard */; };
 		F9CC03A4269C9FFB00844377 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03A3269C9FFB00844377 /* main.m */; };
 		F9CC03AE269C9FFC00844377 /* PricrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03AD269C9FFC00844377 /* PricrTests.m */; };
 		F9CC03B9269C9FFC00844377 /* PricrUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03B8269C9FFC00844377 /* PricrUITests.m */; };
+		F9CC03C8269CAE3400844377 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03C7269CAE3400844377 /* SignupViewController.m */; };
+		F9CC03CC269CE42E00844377 /* HomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03CB269CE42E00844377 /* HomeCollectionViewController.m */; };
+		F9CC03CF269CE49400844377 /* ItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03CE269CE49400844377 /* ItemCollectionViewCell.m */; };
+		F9CC03D3269CE7C800844377 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03D2269CE7C800844377 /* ProfileViewController.m */; };
+		F9CC03D9269CEEEF00844377 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC03D8269CEEEF00844377 /* Item.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +44,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		101B9BF76819BC687F763B84 /* Pods-PricrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PricrTests.release.xcconfig"; path = "Target Support Files/Pods-PricrTests/Pods-PricrTests.release.xcconfig"; sourceTree = "<group>"; };
+		159F23A3714998FA3F6DBBCB /* Pods_Pricr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pricr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2005D82BFFB1183FF2D7B3F8 /* Pods-Pricr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr.release.xcconfig"; path = "Target Support Files/Pods-Pricr/Pods-Pricr.release.xcconfig"; sourceTree = "<group>"; };
+		2BF88910495047782CEB52CC /* Pods-PricrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PricrTests.debug.xcconfig"; path = "Target Support Files/Pods-PricrTests/Pods-PricrTests.debug.xcconfig"; sourceTree = "<group>"; };
+		34030C28578096CF9BA4492D /* Pods-Pricr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr.debug.xcconfig"; path = "Target Support Files/Pods-Pricr/Pods-Pricr.debug.xcconfig"; sourceTree = "<group>"; };
+		7E1DDE1EBAB97AAA57FCB132 /* Pods-Pricr-PricrUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr-PricrUITests.debug.xcconfig"; path = "Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PricrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pricr_PricrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0752DEAF778032BB6043BE8 /* Pods-Pricr-PricrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr-PricrUITests.release.xcconfig"; path = "Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F9CC038E269C9FFA00844377 /* Pricr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pricr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CC0391269C9FFA00844377 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9CC0392269C9FFA00844377 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F9CC0394269C9FFA00844377 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		F9CC0395269C9FFA00844377 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		F9CC0397269C9FFA00844377 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F9CC0398269C9FFA00844377 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F9CC0397269C9FFA00844377 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F9CC0398269C9FFA00844377 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F9CC039B269C9FFA00844377 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F9CC039D269C9FFB00844377 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9CC03A0269C9FFB00844377 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +71,16 @@
 		F9CC03B4269C9FFC00844377 /* PricrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PricrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CC03B8269C9FFC00844377 /* PricrUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PricrUITests.m; sourceTree = "<group>"; };
 		F9CC03BA269C9FFC00844377 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9CC03C6269CAE3400844377 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		F9CC03C7269CAE3400844377 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		F9CC03CA269CE42E00844377 /* HomeCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewController.h; sourceTree = "<group>"; };
+		F9CC03CB269CE42E00844377 /* HomeCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewController.m; sourceTree = "<group>"; };
+		F9CC03CD269CE49400844377 /* ItemCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCollectionViewCell.h; sourceTree = "<group>"; };
+		F9CC03CE269CE49400844377 /* ItemCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCollectionViewCell.m; sourceTree = "<group>"; };
+		F9CC03D1269CE7C800844377 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		F9CC03D2269CE7C800844377 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		F9CC03D7269CEEEF00844377 /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		F9CC03D8269CEEEF00844377 /* Item.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253C959EFFE46D9B702A52EA /* Pods_Pricr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3585A68E0BC3A437C6F70664 /* Pods_PricrTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +104,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D45ECBCBA410520AEF97884 /* Pods_Pricr_PricrUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1307E31C6754B3269F697288 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34030C28578096CF9BA4492D /* Pods-Pricr.debug.xcconfig */,
+				2005D82BFFB1183FF2D7B3F8 /* Pods-Pricr.release.xcconfig */,
+				7E1DDE1EBAB97AAA57FCB132 /* Pods-Pricr-PricrUITests.debug.xcconfig */,
+				F0752DEAF778032BB6043BE8 /* Pods-Pricr-PricrUITests.release.xcconfig */,
+				2BF88910495047782CEB52CC /* Pods-PricrTests.debug.xcconfig */,
+				101B9BF76819BC687F763B84 /* Pods-PricrTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E985F03D0B8E0CA0FFB7C1F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				159F23A3714998FA3F6DBBCB /* Pods_Pricr.framework */,
+				E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */,
+				C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F9CC0385269C9FFA00844377 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +141,8 @@
 				F9CC03AC269C9FFC00844377 /* PricrTests */,
 				F9CC03B7269C9FFC00844377 /* PricrUITests */,
 				F9CC038F269C9FFA00844377 /* Products */,
+				1307E31C6754B3269F697288 /* Pods */,
+				E985F03D0B8E0CA0FFB7C1F3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,9 +163,10 @@
 				F9CC0392269C9FFA00844377 /* AppDelegate.m */,
 				F9CC0394269C9FFA00844377 /* SceneDelegate.h */,
 				F9CC0395269C9FFA00844377 /* SceneDelegate.m */,
-				F9CC0397269C9FFA00844377 /* ViewController.h */,
-				F9CC0398269C9FFA00844377 /* ViewController.m */,
+				F9CC03D0269CE4AE00844377 /* views */,
+				F9CC03C9269CD5BA00844377 /* view controllers */,
 				F9CC039A269C9FFA00844377 /* Main.storyboard */,
+				F9CC03DB269CEF0400844377 /* models */,
 				F9CC039D269C9FFB00844377 /* Assets.xcassets */,
 				F9CC039F269C9FFB00844377 /* LaunchScreen.storyboard */,
 				F9CC03A2269C9FFB00844377 /* Info.plist */,
@@ -137,6 +193,40 @@
 			path = PricrUITests;
 			sourceTree = "<group>";
 		};
+		F9CC03C9269CD5BA00844377 /* view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9CC03C6269CAE3400844377 /* SignupViewController.h */,
+				F9CC03C7269CAE3400844377 /* SignupViewController.m */,
+				F9CC0397269C9FFA00844377 /* LoginViewController.h */,
+				F9CC0398269C9FFA00844377 /* LoginViewController.m */,
+				F9CC03CA269CE42E00844377 /* HomeCollectionViewController.h */,
+				F9CC03CB269CE42E00844377 /* HomeCollectionViewController.m */,
+				F9CC03D1269CE7C800844377 /* ProfileViewController.h */,
+				F9CC03D2269CE7C800844377 /* ProfileViewController.m */,
+			);
+			path = "view controllers";
+			sourceTree = "<group>";
+		};
+		F9CC03D0269CE4AE00844377 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				F9CC03CD269CE49400844377 /* ItemCollectionViewCell.h */,
+				F9CC03CE269CE49400844377 /* ItemCollectionViewCell.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		F9CC03DB269CEF0400844377 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				F9CC03D7269CEEEF00844377 /* Item.h */,
+				F9CC03D8269CEEEF00844377 /* Item.m */,
+			);
+			name = models;
+			path = "New Group/models";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +234,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9CC03BD269C9FFC00844377 /* Build configuration list for PBXNativeTarget "Pricr" */;
 			buildPhases = (
+				8922A19B17BA93F9A900A194 /* [CP] Check Pods Manifest.lock */,
 				F9CC038A269C9FFA00844377 /* Sources */,
 				F9CC038B269C9FFA00844377 /* Frameworks */,
 				F9CC038C269C9FFA00844377 /* Resources */,
+				DC6BE612087C20EAD21FE9C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +253,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9CC03C0269C9FFC00844377 /* Build configuration list for PBXNativeTarget "PricrTests" */;
 			buildPhases = (
+				7D9E8BBD889353ED45FE21D5 /* [CP] Check Pods Manifest.lock */,
 				F9CC03A5269C9FFC00844377 /* Sources */,
 				F9CC03A6269C9FFC00844377 /* Frameworks */,
 				F9CC03A7269C9FFC00844377 /* Resources */,
@@ -179,9 +272,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9CC03C3269C9FFC00844377 /* Build configuration list for PBXNativeTarget "PricrUITests" */;
 			buildPhases = (
+				D1004CAA13A2357F72D3120E /* [CP] Check Pods Manifest.lock */,
 				F9CC03B0269C9FFC00844377 /* Sources */,
 				F9CC03B1269C9FFC00844377 /* Frameworks */,
 				F9CC03B2269C9FFC00844377 /* Resources */,
+				734ECC7183E71736B1D9EE0F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -261,15 +356,123 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		734ECC7183E71736B1D9EE0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D9E8BBD889353ED45FE21D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PricrTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8922A19B17BA93F9A900A194 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pricr-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1004CAA13A2357F72D3120E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pricr-PricrUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC6BE612087C20EAD21FE9C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pricr/Pods-Pricr-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pricr/Pods-Pricr-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pricr/Pods-Pricr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F9CC038A269C9FFA00844377 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9CC0399269C9FFA00844377 /* ViewController.m in Sources */,
+				F9CC03D9269CEEEF00844377 /* Item.m in Sources */,
+				F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */,
 				F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */,
+				F9CC03D3269CE7C800844377 /* ProfileViewController.m in Sources */,
 				F9CC03A4269C9FFB00844377 /* main.m in Sources */,
 				F9CC0396269C9FFA00844377 /* SceneDelegate.m in Sources */,
+				F9CC03CF269CE49400844377 /* ItemCollectionViewCell.m in Sources */,
+				F9CC03C8269CAE3400844377 /* SignupViewController.m in Sources */,
+				F9CC03CC269CE42E00844377 /* HomeCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +641,7 @@
 		};
 		F9CC03BE269C9FFC00844377 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34030C28578096CF9BA4492D /* Pods-Pricr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +660,7 @@
 		};
 		F9CC03BF269C9FFC00844377 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2005D82BFFB1183FF2D7B3F8 /* Pods-Pricr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -474,6 +679,7 @@
 		};
 		F9CC03C1269C9FFC00844377 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BF88910495047782CEB52CC /* Pods-PricrTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -494,6 +700,7 @@
 		};
 		F9CC03C2269C9FFC00844377 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 101B9BF76819BC687F763B84 /* Pods-PricrTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -514,6 +721,7 @@
 		};
 		F9CC03C4269C9FFC00844377 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E1DDE1EBAB97AAA57FCB132 /* Pods-Pricr-PricrUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HSWX36ZH68;
@@ -532,6 +740,7 @@
 		};
 		F9CC03C5269C9FFC00844377 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0752DEAF778032BB6043BE8 /* Pods-Pricr-PricrUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HSWX36ZH68;

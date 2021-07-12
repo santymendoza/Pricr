@@ -1,0 +1,6 @@
+framework module Pods_Pricr_PricrUITests {
+  umbrella header "Pods-Pricr-PricrUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
