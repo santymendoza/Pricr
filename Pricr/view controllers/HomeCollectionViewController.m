@@ -32,7 +32,18 @@ static NSString * const reuseIdentifier = @"Cell";
    [self.refreshControl addTarget: self action:@selector(getData) forControlEvents: UIControlEventValueChanged];
    [self.itemCollectionView  insertSubview:self.refreshControl atIndex:0];
    
-   
+    UICollectionViewFlowLayout *layout = self.collectionView.collectionViewLayout;
+    
+    
+    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 5;
+    
+    CGFloat posterPerLine = 3;
+    CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (posterPerLine - 1)) / posterPerLine;
+    CGFloat itemHeight = itemWidth * 1.75;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
+    
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -77,11 +88,8 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-#pragma mark <UICollectionViewDataSource>
+//#pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -91,9 +99,10 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ItemCollectionViewCell" forIndexPath:indexPath];
     
-    Item *item = self.arrayOfItems[indexPath.row];
+    Item *item = self.arrayOfItems[indexPath.item];
     
     [cell setItem:item];
+    
     return cell;
     
 }

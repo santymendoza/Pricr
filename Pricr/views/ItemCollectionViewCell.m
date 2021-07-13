@@ -13,7 +13,7 @@
 @implementation ItemCollectionViewCell
 
 
-- (void)setPost:(Item *)item {
+- (void)setItem:(Item *)item {
     _item = item;
     self.itemImage.file = item[@"image"];
     self.itemName.text = item[@"name"];

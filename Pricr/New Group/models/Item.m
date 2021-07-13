@@ -1,5 +1,5 @@
 //
-//  Post.m
+//  Item.m
 //  Instagram
 //
 //  Created by Santy Mendoza on 7/7/21.
@@ -18,10 +18,10 @@
 
 
 + (nonnull NSString *)parseClassName {
-    return @"Post";
+    return @"Item";
 }
 
-+ (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Item *newItem = [Item new];
     newItem.image = [self getPFFileFromImage:image];
