@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *itemPrice;
 @property (weak, nonatomic) IBOutlet UITextField *itemLocation;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescription;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (strong, nonatomic) UIImage *selectedImage;
 
 
@@ -76,6 +77,8 @@
     self.selectedImage = [self resizeImage:originalImage withSize:CGSizeMake(200.0, 200.0)];
     self.itemImage.image  = originalImage;
     
+    [self.imageButton setTitle:@"" forState:UIControlStateNormal];
+
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -91,11 +94,12 @@
     [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return newImage;
 }
 
-
+- (void)textFieldDidBeginEditing:(UITextView *)textField {
+    self.itemDescription.text = @"";
+}
 
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -104,6 +108,8 @@
 }
 
 - (IBAction)postButtonPressed:(id)sender {
+    NSMutableArray *arrOfPrices = [NSMutableArray new];
+    [arrOfPrices addObject: self.itemPrice.text];
     [Item postUserItem:self.selectedImage withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"successfully uploaded an item!");
@@ -111,7 +117,7 @@
         } else{
             NSLog(@"did not post image!");
         }
-    }];
+    } withName:self.itemName.text withPrices:arrOfPrices];
 
 
 }

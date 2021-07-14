@@ -95,7 +95,7 @@
             <objects>
                 <viewController id="GZg-AR-zGW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ES4-pS-Pok">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Xbu-dh-ySt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -111,7 +111,7 @@
             <objects>
                 <viewController id="kFQ-3p-OwK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V1V-78-jpD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="3Fq-fG-9PF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -127,7 +127,7 @@
             <objects>
                 <viewController id="K1m-kJ-Y5Q" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g4u-kP-iUf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utN-N5-hFm">
@@ -156,7 +156,7 @@
             <objects>
                 <viewController id="7Rh-CY-BKF" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ab2-fs-xLq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ax-st-JYF">
@@ -211,7 +211,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7D1-gC-yjH">
                                 <rect key="frame" x="107" y="20" width="200" height="200"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="HUn-f6-os9"/>
                                     <constraint firstAttribute="width" constant="200" id="dXY-eP-ofC"/>
@@ -263,11 +263,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="location"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DUl-1r-qvv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write Description Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DUl-1r-qvv">
                                 <rect key="frame" x="20" y="422" width="374" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -291,6 +290,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRq-LF-gMI">
                                 <rect key="frame" x="107" y="20" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Tap here to upload Image">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="imageHit:" destination="Omg-2H-caK" eventType="touchUpInside" id="jfU-Hr-ttM"/>
                                 </connections>
@@ -304,6 +306,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageButton" destination="qRq-LF-gMI" id="cGP-NL-kKB"/>
                         <outlet property="itemDescription" destination="DUl-1r-qvv" id="7Ub-Gz-1Gv"/>
                         <outlet property="itemImage" destination="7D1-gC-yjH" id="rwv-d3-ddA"/>
                         <outlet property="itemLocation" destination="Ena-Sa-S6y" id="vE8-o0-DvV"/>
@@ -315,27 +318,70 @@
             </objects>
             <point key="canvasLocation" x="3311.594202898551" y="-676.33928571428567"/>
         </scene>
-        <!--View Controller-->
+        <!--Scanner View Controller-->
         <scene sceneID="Omo-g9-YFD">
             <objects>
-                <viewController id="fnV-Wt-d1H" sceneMemberID="viewController">
+                <viewController id="fnV-Wt-d1H" customClass="ScannerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wPd-vv-kCr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oe0-Oz-Uc7">
+                                <rect key="frame" x="57" y="216" width="300" height="300"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="ZsH-7R-vqP"/>
+                                    <constraint firstAttribute="height" constant="300" id="qs9-Nl-A8Z"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFu-vf-72i">
+                                <rect key="frame" x="57" y="216" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Tap here to scan barcode">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="imageHit:" destination="fnV-Wt-d1H" eventType="touchUpInside" id="0XU-4f-Eq1"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="wht-8S-1TC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Oe0-Oz-Uc7" firstAttribute="top" secondItem="wht-8S-1TC" secondAttribute="top" constant="216" id="HoH-rq-SRx"/>
+                            <constraint firstItem="Oe0-Oz-Uc7" firstAttribute="leading" secondItem="wht-8S-1TC" secondAttribute="leading" constant="57" id="PV7-3p-2O9"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageButton" destination="IFu-vf-72i" id="znK-oP-pkg"/>
+                        <outlet property="scannerViewImage" destination="Oe0-Oz-Uc7" id="gpY-Wy-vts"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wJ3-2l-sz2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3312" y="19"/>
+        </scene>
+        <!--Scanner Results View Controller-->
+        <scene sceneID="Gz6-Uj-zOW">
+            <objects>
+                <viewController id="cO3-il-WVQ" customClass="ScannerResultsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VsA-cW-1ry">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MZp-lK-pTt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GzS-of-6I1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4357" y="19"/>
         </scene>
         <!--AuthenticatedViewController-->
         <scene sceneID="pgc-UJ-07L">
             <objects>
                 <collectionViewController storyboardIdentifier="AuthenticatedViewController" title="AuthenticatedViewController" id="zBh-dq-4Zg" customClass="HomeCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6t3-90-aG9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="6zp-2G-PAa">
@@ -401,7 +447,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gmD-fT-KZd">
             <objects>
-                <tabBarController id="fqX-jq-5aB" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="fqX-jq-5aB" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0H9-Zd-47a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -422,9 +468,9 @@
         <!--Signup View Controller-->
         <scene sceneID="SGT-8V-Oy1">
             <objects>
-                <viewController id="8T2-mk-mhh" customClass="SignupViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="8T2-mk-mhh" customClass="SignupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aw8-hv-PB8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-ir-HSd">
@@ -514,11 +560,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

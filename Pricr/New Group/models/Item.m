@@ -21,14 +21,14 @@
     return @"Item";
 }
 
-+ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices {
     
     Item *newItem = [Item new];
     newItem.image = [self getPFFileFromImage:image];
     newItem.author = [PFUser currentUser];
+    newItem.name = name;
     newItem.description = description;
-    newItem.prices = [NSMutableArray new];
-    
+    newItem.prices = prices;
     [newItem saveInBackgroundWithBlock: completion];
 }
 
