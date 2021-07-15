@@ -14,19 +14,12 @@
 #import "ScannerResultsViewController.h"
 
 
-
-
-
 @interface ScannerViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *scannerViewImage;
 @property (strong, nonatomic) UIImage *barcodeImage;
 @property (strong, nonatomic) MLKBarcodeScannerOptions *options;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak,nonatomic) NSString *UPCCode;
-
-
-
-
 @end
 
 @implementation ScannerViewController

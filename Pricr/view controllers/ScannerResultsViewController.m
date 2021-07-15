@@ -34,6 +34,8 @@
 }
 
 - (IBAction)cancelPressed:(id)sender {
+    self.tabBarController.selectedViewController
+        = [self.tabBarController.viewControllers objectAtIndex:0];
 }
 
 
@@ -48,6 +50,8 @@
                 NSLog(@"did not post image!");
             }
         } withName:self.itemName.text withPrices:arrOfPrices];
+    self.tabBarController.selectedViewController
+        = [self.tabBarController.viewControllers objectAtIndex:0];
 }
 
 
@@ -70,15 +74,20 @@
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-             //  NSLog(@"%@", dataDictionary);
-               [self updateView:dataDictionary];
                
-//               self.movies = dataDictionary[@"results"];
-//               self.filteredMovies = self.movies;
-//               [self.collectionView reloadData];
-               // TODO: Get the array of movies
-               // TODO: Store the movies in a property to use elsewhere
-               // TODO: Reload your table view data
+               if ([dataDictionary[@"items"] count] == 0){
+                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"No items found with that barcode, try again" preferredStyle:UIAlertControllerStyleAlert];
+                   UIAlertAction *okPressed = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                       [self dismissViewControllerAnimated:YES completion:nil];
+                   }];
+                   [alert addAction:okPressed];
+                   [self presentViewController:alert animated:YES completion:^{
+                       // optional code for what happens after the alert controller has finished presenting
+                   }];
+               }
+               else{
+                   [self updateView:dataDictionary];
+               }
               // [self.activityIndicator stopAnimating];
            }
       //  [self.refreshControl endRefreshing];

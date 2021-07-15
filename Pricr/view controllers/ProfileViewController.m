@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong,nonatomic) NSArray *arrayOfItems;
+@property (weak, nonatomic) IBOutlet PFImageView *profilePic;
+@property (strong,nonatomic) PFUser *user;
 
 
 
@@ -29,8 +31,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.name.text = PFUser.currentUser.username;
-    
+    self.user = PFUser.currentUser;
+    self.name.text = self.user.username;
+    self.profilePic.file = self.user[@"profilePic"];
+    [self.profilePic loadInBackground];
     
     
     
@@ -68,7 +72,6 @@ static NSString * const reuseIdentifier = @"Cell";
         // PFUser.current() will now be nil
     }];
 }
-
 
 - (void) getData {
     // construct PFQuery
