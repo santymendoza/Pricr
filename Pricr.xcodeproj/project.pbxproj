@@ -10,6 +10,7 @@
 		253C959EFFE46D9B702A52EA /* Pods_Pricr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159F23A3714998FA3F6DBBCB /* Pods_Pricr.framework */; };
 		3585A68E0BC3A437C6F70664 /* Pods_PricrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */; };
 		5D45ECBCBA410520AEF97884 /* Pods_Pricr_PricrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */; };
+		F98C950026A0C1CD00FCB7D7 /* itemDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C94FF26A0C1CD00FCB7D7 /* itemDetailsViewController.m */; };
 		F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0392269C9FFA00844377 /* AppDelegate.m */; };
 		F9CC0396269C9FFA00844377 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0395269C9FFA00844377 /* SceneDelegate.m */; };
 		F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0398269C9FFA00844377 /* LoginViewController.m */; };
@@ -56,6 +57,8 @@
 		C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PricrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pricr_PricrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0752DEAF778032BB6043BE8 /* Pods-Pricr-PricrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr-PricrUITests.release.xcconfig"; path = "Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F98C94FE26A0C1CD00FCB7D7 /* itemDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itemDetailsViewController.h; sourceTree = "<group>"; };
+		F98C94FF26A0C1CD00FCB7D7 /* itemDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itemDetailsViewController.m; sourceTree = "<group>"; };
 		F9CC038E269C9FFA00844377 /* Pricr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pricr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CC0391269C9FFA00844377 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9CC0392269C9FFA00844377 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				F9CC0398269C9FFA00844377 /* LoginViewController.m */,
 				F9CC03CA269CE42E00844377 /* HomeCollectionViewController.h */,
 				F9CC03CB269CE42E00844377 /* HomeCollectionViewController.m */,
+				F98C94FE26A0C1CD00FCB7D7 /* itemDetailsViewController.h */,
+				F98C94FF26A0C1CD00FCB7D7 /* itemDetailsViewController.m */,
 				F9CC03D1269CE7C800844377 /* ProfileViewController.h */,
 				F9CC03D2269CE7C800844377 /* ProfileViewController.m */,
 				F9CC03DF269E429700844377 /* ScannerViewController.h */,
@@ -483,6 +488,7 @@
 				F9CC03D9269CEEEF00844377 /* Item.m in Sources */,
 				F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */,
 				F9CC03DE269E0B9A00844377 /* ManualCreateViewController.m in Sources */,
+				F98C950026A0C1CD00FCB7D7 /* itemDetailsViewController.m in Sources */,
 				F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */,
 				F9CC03D3269CE7C800844377 /* ProfileViewController.m in Sources */,
 				F9CC03A4269C9FFB00844377 /* main.m in Sources */,

@@ -177,6 +177,7 @@
                                         <connections>
                                             <outlet property="itemImage" destination="uyO-ng-zen" id="uO2-Ss-mKz"/>
                                             <outlet property="itemName" destination="uph-5H-5RI" id="wI8-6m-feL"/>
+                                            <segue destination="lLE-4g-XOc" kind="presentation" id="k8c-Fx-8hr"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -221,16 +222,16 @@
             </objects>
             <point key="canvasLocation" x="1808.6956521739132" y="1942.6339285714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Item Details View Controller-->
         <scene sceneID="CKd-Sf-Mqe">
             <objects>
-                <viewController id="lLE-4g-XOc" sceneMemberID="viewController">
+                <viewController id="lLE-4g-XOc" customClass="itemDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDL-Zt-NR8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="szV-X6-0eM">
-                                <rect key="frame" x="20" y="44" width="374" height="289"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="szV-X6-0eM" customClass="PFImageView">
+                                <rect key="frame" x="20" y="0.0" width="374" height="289"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="289" id="pj0-uU-w4l"/>
                                     <constraint firstAttribute="width" constant="374" id="yVE-iK-rYX"/>
@@ -266,6 +267,12 @@
                             <constraint firstItem="szV-X6-0eM" firstAttribute="top" secondItem="T5y-DS-ZZe" secondAttribute="top" id="yfT-Bb-B5p"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="itemDescription" destination="LOc-YN-7gn" id="2Of-Cb-lqw"/>
+                        <outlet property="itemImage" destination="szV-X6-0eM" id="SWV-mR-7gt"/>
+                        <outlet property="itemName" destination="pf2-zN-rKT" id="Smg-N2-kwM"/>
+                        <outlet property="itemPrice" destination="w4o-zK-T7o" id="DZ2-2x-IG8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icr-0M-OXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -660,6 +667,7 @@
                                 <connections>
                                     <outlet property="itemImage" destination="yBS-ZF-c6R" id="RoC-pb-UAE"/>
                                     <outlet property="itemName" destination="Z9W-a3-eg2" id="h6e-iq-Heu"/>
+                                    <segue destination="lLE-4g-XOc" kind="presentation" id="4tI-9N-OUd"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -786,6 +794,9 @@
             <point key="canvasLocation" x="-400" y="-706"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="k8c-Fx-8hr"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

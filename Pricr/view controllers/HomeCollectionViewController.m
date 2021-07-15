@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "Item.h"
 #import "ItemCollectionViewCell.h"
+#import "itemDetailsViewController.h"
 
 @interface HomeCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (strong, nonatomic) IBOutlet UICollectionView *itemCollectionView;
@@ -78,15 +79,21 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
-/*
-#pragma mark - Navigation
+
+//#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UITableView *tappedCell = sender;
+    NSIndexPath *indexPath = [self.itemCollectionView indexPathForCell: tappedCell];
+    NSDictionary *item = self.arrayOfItems[indexPath.item];
+    
+    itemDetailsViewController *detailViewController = [segue destinationViewController];
+    detailViewController.item = item;
 }
-*/
+
 
 //#pragma mark <UICollectionViewDataSource>
 
