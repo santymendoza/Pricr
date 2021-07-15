@@ -6,8 +6,15 @@
 //
 
 #import "ScannerResultsViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "Item.h"
 
 @interface ScannerResultsViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *itemName;
+@property (weak, nonatomic) IBOutlet UITextField *itemLocaation;
+@property (weak, nonatomic) IBOutlet UITextField *itemPrice;
+@property (weak, nonatomic) IBOutlet UITextView *itemDescription;
+@property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 
 @end
 
@@ -22,6 +29,26 @@
 }
 
 
+
+- (IBAction)imageHit:(id)sender {
+}
+
+- (IBAction)cancelPressed:(id)sender {
+}
+
+
+- (IBAction)postPressed:(id)sender {
+        NSMutableArray *arrOfPrices = [NSMutableArray new];
+        [arrOfPrices addObject: self.itemPrice.text];
+        [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"successfully uploaded an item!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else{
+                NSLog(@"did not post image!");
+            }
+        } withName:self.itemName.text withPrices:arrOfPrices];
+}
 
 
 - (void) fetchItem {
@@ -43,7 +70,8 @@
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-               NSLog(@"%@", dataDictionary);
+             //  NSLog(@"%@", dataDictionary);
+               [self updateView:dataDictionary];
                
 //               self.movies = dataDictionary[@"results"];
 //               self.filteredMovies = self.movies;
@@ -59,7 +87,15 @@
 
 }
 
-
+- (void) updateView: (NSDictionary *) data{
+    self.itemName.text = data[@"items"][0][@"brand"];
+    self.itemDescription.text = data[@"items"][0][@"description"];
+    
+    //NSLog(@"%@",data[@"items"][0][@"images"][0]);
+    NSURL *itemURL = [NSURL URLWithString:data[@"items"][0][@"images"][0]];
+    self.itemImage.image = nil;
+    [self.itemImage setImageWithURL: itemURL];
+}
 /*
 #pragma mark - Navigation
 

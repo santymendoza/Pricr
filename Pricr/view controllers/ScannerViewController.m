@@ -57,10 +57,10 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
-//- (IBAction)getDataButton:(id)sender {
-//    NSLog(@"%@",self.UPCCode);
-//    [self performSegueWithIdentifier:@"getData" sender:self.UPCCode];
-//}
+- (IBAction)getDataButton:(id)sender {
+    NSLog(@"%@",self.UPCCode);
+    [self performSegueWithIdentifier:@"getData" sender:self.UPCCode];
+}
 
 
 
@@ -171,9 +171,6 @@
 
 }
 
-- (IBAction)postButtonPressed:(id)sender {
-
-}
 
 
 //#pragma mark - Navigation

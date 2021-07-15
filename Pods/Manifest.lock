@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.1)
   - GoogleDataTransport (9.1.0):
     - GoogleUtilities/Environment (~> 7.2)
@@ -65,12 +80,14 @@ PODS:
   - Protobuf (3.17.0)
 
 DEPENDENCIES:
+  - AFNetworking
   - GoogleMLKit/BarcodeScanning
   - Parse
   - Parse/UI
 
 SPEC REPOS:
   trunk:
+    - AFNetworking
     - Bolts
     - GoogleDataTransport
     - GoogleMLKit
@@ -88,6 +105,7 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleMLKit: 85ffdc9641d05311c76dbba5bbf93059087be12f
@@ -104,6 +122,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
 
-PODFILE CHECKSUM: 987599e35d599329e15af6e95d13c23cb259e231
+PODFILE CHECKSUM: cbea4ae452ae579843c45f46c4e4b56ee4bafbbe
 
 COCOAPODS: 1.10.1

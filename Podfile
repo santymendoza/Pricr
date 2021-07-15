@@ -9,6 +9,7 @@ target 'Pricr' do
 pod 'Parse'
 pod 'Parse/UI'
 pod 'GoogleMLKit/BarcodeScanning'
+pod 'AFNetworking'
  
   target 'PricrTests' do
     inherit! :search_paths
