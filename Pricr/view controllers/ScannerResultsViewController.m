@@ -15,14 +15,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%@",self.url);
+    [self fetchItem];
+    
     // Do any additional setup after loading the view.
 }
 
 
 
 
-- (void) fetchMovies {
-    NSURL *url = [NSURL URLWithString:@"https://api.upcitemdb.com/prod/trial/lookup?upc="];
+- (void) fetchItem {
+    NSString *urlCombined = [@"https://api.upcitemdb.com/prod/trial/lookup?upc=" stringByAppendingString:self.url];
+    NSURL *url = [NSURL URLWithString:urlCombined];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -39,11 +43,11 @@
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-               //NSLog(@"%@", dataDictionary);
+               NSLog(@"%@", dataDictionary);
                
-               self.movies = dataDictionary[@"results"];
-               self.filteredMovies = self.movies;
-               [self.collectionView reloadData];
+//               self.movies = dataDictionary[@"results"];
+//               self.filteredMovies = self.movies;
+//               [self.collectionView reloadData];
                // TODO: Get the array of movies
                // TODO: Store the movies in a property to use elsewhere
                // TODO: Reload your table view data

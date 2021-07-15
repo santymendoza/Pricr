@@ -173,8 +173,6 @@
 				F9CC0394269C9FFA00844377 /* SceneDelegate.h */,
 				F9CC0395269C9FFA00844377 /* SceneDelegate.m */,
 				F9CC039A269C9FFA00844377 /* Main.storyboard */,
-				F9CC03E2269F4E0D00844377 /* ScannerResultsViewController.h */,
-				F9CC03E3269F4E0D00844377 /* ScannerResultsViewController.m */,
 				F9CC03D0269CE4AE00844377 /* views */,
 				F9CC03C9269CD5BA00844377 /* view controllers */,
 				F9CC03DB269CEF0400844377 /* models */,
@@ -207,6 +205,8 @@
 		F9CC03C9269CD5BA00844377 /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F9CC03E2269F4E0D00844377 /* ScannerResultsViewController.h */,
+				F9CC03E3269F4E0D00844377 /* ScannerResultsViewController.m */,
 				F9CC03DC269E0B9A00844377 /* ManualCreateViewController.h */,
 				F9CC03DD269E0B9A00844377 /* ManualCreateViewController.m */,
 				F9CC03C6269CAE3400844377 /* SignupViewController.h */,

@@ -344,6 +344,15 @@
                                     <action selector="imageHit:" destination="fnV-Wt-d1H" eventType="touchUpInside" id="0XU-4f-Eq1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5K-7V-EvX">
+                                <rect key="frame" x="331" y="20" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="See Results"/>
+                                <connections>
+                                    <action selector="getDataButton:" destination="fnV-Wt-d1H" eventType="touchUpInside" id="PNs-ES-Fo9"/>
+                                    <segue destination="cO3-il-WVQ" kind="presentation" identifier="getData" id="Og5-fR-npr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wht-8S-1TC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -359,18 +368,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wJ3-2l-sz2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3312" y="19"/>
+            <point key="canvasLocation" x="3311.594202898551" y="18.75"/>
         </scene>
         <!--Scanner Results View Controller-->
         <scene sceneID="Gz6-Uj-zOW">
             <objects>
                 <viewController id="cO3-il-WVQ" customClass="ScannerResultsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VsA-cW-1ry">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="MZp-lK-pTt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bIR-Eh-BCH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GzS-of-6I1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

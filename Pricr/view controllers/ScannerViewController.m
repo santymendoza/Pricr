@@ -11,6 +11,7 @@
 #import <MLKitBarcodeScanning/MLKBarcodeScanner.h>
 #import <MLKitBarcodeScanning/MLKitBarcodeScanning.h>
 #import <MLKitVision/MLKVisionImage.h>
+#import "ScannerResultsViewController.h"
 
 
 
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) UIImage *barcodeImage;
 @property (strong, nonatomic) MLKBarcodeScannerOptions *options;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
+@property (weak,nonatomic) NSString *UPCCode;
 
 
 
@@ -55,7 +57,47 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+//- (IBAction)getDataButton:(id)sender {
+//    NSLog(@"%@",self.UPCCode);
+//    [self performSegueWithIdentifier:@"getData" sender:self.UPCCode];
+//}
 
+
+
+- (void) fetchItem: (NSString *) url2{
+    NSString *urlCombined = [@"https://api.upcitemdb.com/prod/trial/lookup?upc=" stringByAppendingString:url2];
+    NSURL *url = [NSURL URLWithString:urlCombined];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+           if (error != nil) {
+//               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Device not connected to internet" preferredStyle:UIAlertControllerStyleAlert];
+//               UIAlertAction *okPressed = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                   NSLog(@"OK?");
+//               }];
+//               [alert addAction:okPressed];
+//               [self presentViewController:alert animated:YES completion:^{
+//                   // optional code for what happens after the alert controller has finished presenting
+//                   [self fetchMovies];
+//               }];
+           }
+           else {
+               NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               NSLog(@"%@", dataDictionary);
+               
+//               self.movies = dataDictionary[@"results"];
+//               self.filteredMovies = self.movies;
+//               [self.collectionView reloadData];
+               // TODO: Get the array of movies
+               // TODO: Store the movies in a property to use elsewhere
+               // TODO: Reload your table view data
+              // [self.activityIndicator stopAnimating];
+           }
+      //  [self.refreshControl endRefreshing];
+       }];
+    [task resume];
+
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
@@ -95,8 +137,14 @@
 
              NSString *displayValue = barcode.displayValue;
              NSString *rawValue = barcode.rawValue;
+             self.UPCCode = displayValue;
              NSLog(@"%@",displayValue);
              NSLog(@"%@",rawValue);
+              
+            [self performSegueWithIdentifier:@"getData" sender:self.UPCCode];
+    
+              //[self fetchItem:displayValue];
+            //[self performSegueWithIdentifier:@"getData" sender:displayValue];
 
            }
       }
@@ -127,14 +175,16 @@
 
 }
 
-/*
-#pragma mark - Navigation
+
+//#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    ScannerResultsViewController *scannerResults = [segue destinationViewController];
+    scannerResults.url = sender;
+    
+   // [self presentViewController:scannerResults animated:TRUE completion:nil];
 }
-*/
+
 
 @end
