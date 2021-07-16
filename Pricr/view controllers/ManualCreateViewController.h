@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ManualCreateViewController : UIViewController
-
+@property (strong,nonatomic) NSDictionary *venue;
 @end
 
 NS_ASSUME_NONNULL_END

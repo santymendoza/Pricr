@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "ItemCollectionViewCell.h"
 #import "Item.h"
+#import <QuartzCore/QuartzCore.h>
 #import "itemDetailsViewController.h"
 
 @interface ProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -34,7 +35,11 @@ static NSString * const reuseIdentifier = @"Cell";
     self.user = PFUser.currentUser;
     self.name.text = self.user.username;
     self.profilePic.file = self.user[@"profilePic"];
+    self.profilePic.frame = CGRectMake(0, 0, 175, 175);
+    self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width * .5;
+    self.profilePic.clipsToBounds = YES;
     [self.profilePic loadInBackground];
+
     
     
     

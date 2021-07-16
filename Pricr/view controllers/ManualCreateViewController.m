@@ -10,8 +10,9 @@
 #import "ItemCollectionViewCell.h"
 #import "Item.h"
 #import "HomeCollectionViewController.h"
+#import "LocationsViewController.h"
 
-@interface ManualCreateViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ManualCreateViewController () <UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 @property (weak, nonatomic) IBOutlet UITextField *itemName;
 @property (weak, nonatomic) IBOutlet UITextField *itemPrice;
@@ -28,6 +29,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+
+- (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude venue:(NSDictionary *)venue{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
+    NSLog(@"%@",venue);
+    self.venue = venue;
+//        PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
+//        point.coordinate = coordinate;
+//        point.photo = [self resizeImage:self.selectedImage withSize:CGSizeMake(50.0, 50.0)];
+//        [self.mapView addAnnotation:point];
+   
+    
+}
+
 - (IBAction)imageHit:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -47,9 +63,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
+    
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
     // Do something with the images (based on your use case)
     self.selectedImage = [self resizeImage:originalImage withSize:CGSizeMake(200.0, 200.0)];
@@ -100,14 +116,17 @@
 
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"tagSegue"]) {
+            LocationsViewController *vc = segue.destinationViewController;
+            vc.delegate = self;
+        }
 }
-*/
+
+
 
 @end
