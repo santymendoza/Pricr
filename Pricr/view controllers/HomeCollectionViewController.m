@@ -11,7 +11,7 @@
 #import "ItemCollectionViewCell.h"
 #import "itemDetailsViewController.h"
 
-@interface HomeCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface HomeCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *itemCollectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong,nonatomic) NSArray *arrayOfItems;
@@ -63,6 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
     PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
     [itemQuery orderByDescending:@"createdAt"];
     [itemQuery includeKey:@"author"];
+    [itemQuery includeKey:@"prices"];
     itemQuery.limit = 20;
 
     // fetch data asynchronously

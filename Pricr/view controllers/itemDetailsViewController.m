@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "ItemCollectionViewCell.h"
 #import "Item.h"
+#import "Listing.h"
 
 @interface itemDetailsViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
@@ -27,7 +28,9 @@
     self.itemName.text = self.item[@"name"];
     self.itemDescription.text = self.item[@"description"];
     self.itemImage.file = self.item[@"image"];
-    self.itemPrice.text = self.item.prices[0];
+    Listing *new = self.item[@"prices"][0];
+    NSLog(@"%@",new.price);
+    self.itemPrice.text = new.price;
     [self.itemImage loadInBackground];
 }
 

@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ItemMapViewController : UIViewController
-- (NSString *) getCityName;
 @end
 
 NS_ASSUME_NONNULL_END

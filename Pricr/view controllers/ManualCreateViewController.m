@@ -11,6 +11,7 @@
 #import "Item.h"
 #import "HomeCollectionViewController.h"
 #import "LocationsViewController.h"
+#import "Listing.h"
 
 @interface ManualCreateViewController () <UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
@@ -34,13 +35,12 @@
     [self.navigationController popViewControllerAnimated:YES];
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
-    NSLog(@"%@",venue);
+    //NSLog(@"%@",venue);
     self.venue = venue;
-//        PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
-//        point.coordinate = coordinate;
-//        point.photo = [self resizeImage:self.selectedImage withSize:CGSizeMake(50.0, 50.0)];
-//        [self.mapView addAnnotation:point];
-   
+    self.itemLocation.text = self.venue[@"name"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+
     
 }
 
@@ -103,7 +103,14 @@
 
 - (IBAction)postButtonPressed:(id)sender {
     NSMutableArray *arrOfPrices = [NSMutableArray new];
-    [arrOfPrices addObject: self.itemPrice.text];
+    Listing *newListing = [Listing new];
+    newListing.price = self.itemPrice.text;
+    newListing.venue = self.venue;
+    newListing.name = self.itemName.text;
+    newListing.image= [self getPFFileFromImage:self.selectedImage];
+    newListing.author = PFUser.currentUser;
+    [arrOfPrices addObject:newListing];
+    
     [Item postUserItem:self.selectedImage withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"successfully uploaded an item!");
@@ -114,6 +121,22 @@
     } withName:self.itemName.text withPrices:arrOfPrices];
 
 
+}
+
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+ 
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 

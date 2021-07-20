@@ -12,6 +12,8 @@
 @dynamic author;
 @dynamic price;
 @dynamic venue;
+@dynamic name;
+@dynamic image;
 
 + (nonnull NSString *)parseClassName {
     return @"Listing";

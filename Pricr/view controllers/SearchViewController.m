@@ -1,50 +1,35 @@
 //
-//  ProfileViewController.m
+//  SearchViewController.m
 //  Pricr
 //
-//  Created by Santy Mendoza on 7/12/21.
+//  Created by Santy Mendoza on 7/20/21.
 //
 
-#import "ProfileViewController.h"
+#import "SearchViewController.h"
+#import "HomeCollectionViewController.h"
 #import <Parse/Parse.h>
-#import "LoginViewController.h"
-#import "ItemCollectionViewCell.h"
 #import "Item.h"
-#import <QuartzCore/QuartzCore.h>
+#import "ItemCollectionViewCell.h"
 #import "itemDetailsViewController.h"
 
-@interface ProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-
-@property (strong, nonatomic) IBOutlet UICollectionView *itemCollectionView;
-@property (weak, nonatomic) IBOutlet UILabel *name;
+@interface SearchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *itemCollectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong,nonatomic) NSArray *arrayOfItems;
-@property (weak, nonatomic) IBOutlet PFImageView *profilePic;
-@property (strong,nonatomic) PFUser *user;
-
-
+@property (strong,nonatomic) NSArray *filteredItems;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
-static NSString * const reuseIdentifier = @"Cell";
+@implementation SearchViewController
 
-@implementation ProfileViewController
+static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.user = PFUser.currentUser;
-    self.name.text = self.user.username;
-    self.profilePic.file = self.user[@"profilePic"];
-    self.profilePic.frame = CGRectMake(0, 0, 175, 175);
-    self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width * .5;
-    self.profilePic.clipsToBounds = YES;
-    [self.profilePic loadInBackground];
-
-    
-    
-    
     self.itemCollectionView.delegate = self;
     self.itemCollectionView.dataSource = self;
+    self.searchBar.delegate = self;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
    [self.refreshControl addTarget: self action:@selector(getData) forControlEvents: UIControlEventValueChanged];
@@ -61,7 +46,6 @@ static NSString * const reuseIdentifier = @"Cell";
     CGFloat itemHeight = itemWidth * 1.75;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
-
     // Register cell classes
     [self.itemCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -69,29 +53,21 @@ static NSString * const reuseIdentifier = @"Cell";
     [self getData];
 }
 
-- (IBAction)logoutPressed:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [[UIApplication sharedApplication].keyWindow setRootViewController: loginViewController];
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
-    }];
-}
+
 
 - (void) getData {
     // construct PFQuery
     PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
-    [itemQuery whereKey:@"author" equalTo:PFUser.currentUser];
     [itemQuery orderByDescending:@"createdAt"];
     [itemQuery includeKey:@"author"];
     [itemQuery includeKey:@"prices"];
-
     itemQuery.limit = 20;
 
     // fetch data asynchronously
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
             self.arrayOfItems = items;
+            self.filteredItems = self.arrayOfItems;
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
         }
@@ -101,34 +77,68 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
 }
 
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if (searchText.length != 0){
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
+        self.filteredItems = [self.arrayOfItems filteredArrayUsingPredicate:predicate];
+        NSLog(@"%@", self.filteredItems);
+    }
+    else{
+        self.filteredItems = self.arrayOfItems;
+    }
+    [self.itemCollectionView reloadData];
+}
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = true;
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = false;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+    self.filteredItems = self.arrayOfItems;
+    [self.itemCollectionView reloadData];
+}
+
 
 //#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
     UITableView *tappedCell = sender;
     NSIndexPath *indexPath = [self.itemCollectionView indexPathForCell: tappedCell];
-    NSDictionary *item = self.arrayOfItems[indexPath.item];
+    NSDictionary *item = self.filteredItems[indexPath.item];
     
     itemDetailsViewController *detailViewController = [segue destinationViewController];
     detailViewController.item = item;
 }
 
 
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+//#pragma mark <UICollectionViewDataSource>
+
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.filteredItems.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ItemCollectionViewCell" forIndexPath:indexPath];
     
-    Item *item = self.arrayOfItems[indexPath.item];
+    Item *item = self.filteredItems[indexPath.item];
     
     [cell setItem:item];
     
     return cell;
+    
 }
 
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.arrayOfItems.count;
-}
-
+#pragma mark <UICollectionViewDelegate>
 
 
 @end
+

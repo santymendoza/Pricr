@@ -8,9 +8,13 @@
 #import "ItemMapViewController.h"
 #import "LocationsViewController.h"
 #import "PhotoAnnotation.h"
-//#import "FullImageViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
+#import <Parse/Parse.h>
+#import "Item.h"
+#import "Listing.h"
+#import "itemDetailsViewController.h"
+
 
 
 
@@ -19,6 +23,9 @@
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic)CLLocation *currentLocation;
 @property (strong,nonatomic)NSString *currentCity;
+@property (strong,nonatomic) NSArray *arrayOfItems;
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+
 
 
 @end
@@ -39,12 +46,12 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     [self.locationManager startUpdatingLocation];
+    
+    [self getData];
 }
 
 
-- (NSString *) getCityName{
-    return self.currentCity;
-}
+
 
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations {
@@ -76,46 +83,131 @@
 }
 
 
-- (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
+- (CLLocationCoordinate2D) getListing: (NSString *) theID{
+    PFQuery *listingQuery = [PFQuery queryWithClassName:@"Listing"];
+    [listingQuery orderByDescending:@"createdAt"];
+    [listingQuery whereKey:@"objectId" equalTo:theID];
+    [listingQuery includeKey:@"author"];
+    listingQuery.limit = 20;
 
-        PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
-        point.coordinate = coordinate;
-        //point.photo = [self resizeImage:self.selectedImage withSize:CGSizeMake(50.0, 50.0)];
-        [self.mapView addAnnotation:point];
+    // fetch data asynchronously
+    [listingQuery findObjectsInBackgroundWithBlock:^(NSArray<Listing *> * _Nullable listings, NSError * _Nullable error) {
+        if (listings) {
+            self.coordinate = CLLocationCoordinate2DMake([listings[0].venue[@"location"][@"lat"] floatValue], [listings[0].venue[@"location"][@"lng"] floatValue]);
+            PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
+            point.coordinate = self.coordinate;
+            point.caption = listings[0].name;
+            
+            NSURL *posterURL = [NSURL URLWithString:listings[0].image.url];
+            point.photo.image = nil;
+            [point.photo setImageWithURL: posterURL];
+            point.photo.image = [self resizeImage:point.photo.image withSize:CGSizeMake(50.0, 50.0)];
+            [self.mapView addAnnotation:point];
+        }
+        else {
+        }
+    }];
+    
+    return self.coordinate;
 }
 
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return newImage;
+}
+
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+ 
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
+- (void) placeItems {
+    for (id item in self.arrayOfItems) {
+        NSLog(@"%@",item[@"prices"][0]);
+        Item *newItem = item[@"prices"][0];
+        NSLog(@"%@",newItem.objectId);
+        [self getListing:newItem.objectId];
+    }
+}
+
+- (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-     MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
-     if (annotationView == nil) {
-         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-         annotationView.canShowCallout = true;
-         annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
-         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-     }
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        annotationView.canShowCallout = true;
+        annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    }
 
-     UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
+    UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
+    // imageView.image = [UIImage imageNamed:@"camera-icon"]; // remove this line
+
+    // add these two lines below
     PhotoAnnotation *photoAnnotationItem = annotation; // refer to this generic annotation as our more specific PhotoAnnotation
-    imageView.image = photoAnnotationItem.photo; // set the image into the callout imageview
+    imageView.image = photoAnnotationItem.photo.image; // set the image into the callout imageview
 
-     return annotationView;
+    return annotationView;
  }
 
 - (void)mapView:(MKMapView *)mapView
  annotationView:(MKAnnotationView *)view
 calloutAccessoryControlTapped:(UIControl *)control{
-    [self performSegueWithIdentifier:@"fullImageSegue" sender:nil];
+    //NSLog(@"%@",view);
+    [self performSegueWithIdentifier:@"annotationSelected" sender:nil];
 }
-/*
-#pragma mark - Navigation
+
+
+- (void) getData {
+    // construct PFQuery
+    PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
+    [itemQuery orderByDescending:@"createdAt"];
+    [itemQuery includeKey:@"author"];
+    itemQuery.limit = 20;
+
+    // fetch data asynchronously
+    [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
+        if (items) {
+            self.arrayOfItems = items;
+            [self placeItems];
+        }
+        else {
+            // handle error
+        }
+    }];
+}
+
+
+//#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"annotationSelected"]){
+        itemDetailsViewController *dc = segue.destinationViewController;
+        //dc.item = ;
+    }
 }
-*/
+
 
 @end

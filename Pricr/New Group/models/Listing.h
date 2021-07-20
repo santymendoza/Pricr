@@ -16,8 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSDictionary *venue;
 @property (nonatomic,strong) NSString *price;
 @property (nonatomic,strong) PFUser *author;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic, strong) PFFileObject *image;
 
-+ (void) postListing: ( NSDictionary * _Nullable )venue price: (NSString * _Nullable)price withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
+
++ (void) postListing: ( NSDictionary * _Nullable )venue image:( UIImage * _Nullable )image name: (NSString * _Nullable)name price: (NSString * _Nullable)price withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 @end
 
 NS_ASSUME_NONNULL_END

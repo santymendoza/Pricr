@@ -9,6 +9,8 @@
 #import "LocationViewCell.h"
 #import "ItemMapViewController.h"
 #import "ManualCreateViewController.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 
 
@@ -19,6 +21,11 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *results;
+@property (strong,nonatomic) CLLocationManager *locationManager;
+@property (strong,nonatomic)NSString *currentCity;
+@property (strong,nonatomic)CLLocation *currentLocation;
+
+
 @end
 
 @implementation LocationsViewController
@@ -29,9 +36,17 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
     
-//    ItemMapViewController *im = [ItemMapViewController new];
-//    [im viewDidLoad];
-    [self fetchLocationsWithQuery:@"Groceries" nearCity:@"Menlo Park"];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -40,6 +55,39 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
     // Dispose of any resources that can be recreated.
 }
 
+- (void) updateTable {
+    [self fetchLocationsWithQuery:@"Groceries" nearCity:self.currentCity];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    self.currentLocation = location;
+    NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
+    
+    //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
+    MKCoordinateRegion userRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
+    //[self.mapView setRegion:userRegion animated:false];
+    
+    [self.locationManager stopUpdatingLocation];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark *placemark = [placemarks objectAtIndex:0];
+             self.currentCity = placemark.locality;
+             [self updateTable];
+         }
+         else
+         {
+             NSLog(@"Geocode failed with error %@", error);
+             NSLog(@"\nCurrent Location Not Detected\n");
+
+         }
+     }];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.results.count;
@@ -66,7 +114,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
+    [self fetchLocationsWithQuery:newText nearCity:self.currentCity];
     return true;
 }
 

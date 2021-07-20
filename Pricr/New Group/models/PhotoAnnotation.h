@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PhotoAnnotation : NSObject <MKAnnotation>
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (strong,nonatomic) UIImage *photo;
+@property (strong,nonatomic) UIImageView *photo;
+@property (strong,nonatomic) NSString *caption;
 
 @end
 

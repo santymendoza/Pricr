@@ -13,9 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LocationsViewControllerDelegate
 
 - (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude venue:(NSDictionary *)venue;
+
+
+
 @end
 
 @interface LocationsViewController : UIViewController
+@property (strong,nonatomic) NSDictionary *location;
 @property (weak, nonatomic) id<LocationsViewControllerDelegate> delegate;
 @end
 
