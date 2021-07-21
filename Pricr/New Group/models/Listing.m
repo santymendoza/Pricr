@@ -14,6 +14,8 @@
 @dynamic venue;
 @dynamic name;
 @dynamic image;
+@dynamic objectId;
+
 
 + (nonnull NSString *)parseClassName {
     return @"Listing";

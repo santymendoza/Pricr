@@ -8,10 +8,12 @@
 #import "ScannerResultsViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "Item.h"
+#import "Listing.h"
+#import "LocationsViewController.h"
 
-@interface ScannerResultsViewController ()
+@interface ScannerResultsViewController ()  <UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *itemName;
-@property (weak, nonatomic) IBOutlet UITextField *itemLocaation;
+@property (weak, nonatomic) IBOutlet UITextField *itemLocation;
 @property (weak, nonatomic) IBOutlet UITextField *itemPrice;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
@@ -22,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@",self.url);
     [self fetchItem];
     
     // Do any additional setup after loading the view.
@@ -40,19 +41,38 @@
 
 
 - (IBAction)postPressed:(id)sender {
-        NSMutableArray *arrOfPrices = [NSMutableArray new];
-        [arrOfPrices addObject: self.itemPrice.text];
-        [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded) {
-                NSLog(@"successfully uploaded an item!");
-                [self dismissViewControllerAnimated:YES completion:nil];
-            } else{
-                NSLog(@"did not post image!");
-            }
-        } withName:self.itemName.text withPrices:arrOfPrices];
+    NSMutableArray *arrOfPrices = [NSMutableArray new];
+    Listing *newListing = [Listing new];
+    newListing.price = self.itemPrice.text;
+    newListing.venue = self.venue;
+    newListing.name = self.itemName.text;
+    //newListing.image= [self getPFFileFromImage:self.selectedImage];
+    newListing.author = PFUser.currentUser;
+    [arrOfPrices addObject:newListing];
+    
+    [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"successfully uploaded an item!");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else{
+            NSLog(@"did not post image!");
+        }
+    } withName:self.itemName.text withPrices:arrOfPrices];
+
     self.tabBarController.selectedViewController
         = [self.tabBarController.viewControllers objectAtIndex:0];
 }
+
+- (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude venue:(NSDictionary *)venue{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
+    //NSLog(@"%@",venue);
+    self.venue = venue;
+    self.itemLocation.text = self.venue[@"name"];
+    [self dismissViewControllerAnimated:YES completion:nil]; 
+}
+
 
 
 - (void) fetchItem {

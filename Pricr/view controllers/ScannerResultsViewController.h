@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ScannerResultsViewController : UIViewController
 
 @property (strong,nonatomic) NSString *url;
+@property (strong,nonatomic) NSDictionary *venue;
 
 @end
 

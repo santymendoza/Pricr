@@ -116,7 +116,7 @@
             NSLog(@"successfully uploaded an item!");
             [self dismissViewControllerAnimated:YES completion:nil];
         } else{
-            NSLog(@"did not post image!");
+            NSLog(@"did not post item!");
         }
     } withName:self.itemName.text withPrices:arrOfPrices];
 

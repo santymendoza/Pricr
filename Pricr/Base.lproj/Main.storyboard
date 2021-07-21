@@ -192,6 +192,7 @@
                     <tabBarItem key="tabBarItem" title="Map" id="bG6-Yg-FvU"/>
                     <connections>
                         <outlet property="mapView" destination="vnw-RL-EIu" id="f7H-VQ-pzo"/>
+                        <segue destination="lLE-4g-XOc" kind="show" identifier="annotationSelected" id="pSJ-Y2-m7z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DVn-nl-lN6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -396,22 +397,22 @@
                                     <constraint firstAttribute="width" constant="374" id="yVE-iK-rYX"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pf2-zN-rKT">
-                                <rect key="frame" x="20" y="403" width="83" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4o-zK-T7o">
-                                <rect key="frame" x="23" y="461" width="77" height="21"/>
+                                <rect key="frame" x="23" y="297" width="77" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="item description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOc-YN-7gn">
-                                <rect key="frame" x="146" y="494" width="123" height="21"/>
+                                <rect key="frame" x="23" y="494" width="371" height="314"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pf2-zN-rKT">
+                                <rect key="frame" x="20" y="411" width="83" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -791,7 +792,7 @@
                     <connections>
                         <outlet property="itemDescription" destination="rdg-XM-voc" id="9ax-kB-xgv"/>
                         <outlet property="itemImage" destination="MxA-Do-2JC" id="PWV-h7-YRI"/>
-                        <outlet property="itemLocaation" destination="zJz-Yz-lv1" id="H3E-gZ-BOf"/>
+                        <outlet property="itemLocation" destination="zJz-Yz-lv1" id="hol-B6-Iag"/>
                         <outlet property="itemName" destination="4Pl-Kn-9rf" id="gLZ-0f-HiR"/>
                         <outlet property="itemPrice" destination="GAM-we-u8o" id="apI-sD-UK5"/>
                     </connections>
@@ -995,8 +996,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DV0-Pw-crd"/>
-        <segue reference="Yyr-O3-5Tj"/>
+        <segue reference="pSJ-Y2-m7z"/>
+        <segue reference="S2H-eT-i8b"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">

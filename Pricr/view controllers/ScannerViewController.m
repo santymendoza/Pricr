@@ -12,6 +12,12 @@
 #import <MLKitBarcodeScanning/MLKitBarcodeScanning.h>
 #import <MLKitVision/MLKVisionImage.h>
 #import "ScannerResultsViewController.h"
+#import <Parse/Parse.h>
+#import "ItemCollectionViewCell.h"
+#import "Item.h"
+#import "HomeCollectionViewController.h"
+#import "LocationsViewController.h"
+#import "Listing.h"
 
 
 @interface ScannerViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>

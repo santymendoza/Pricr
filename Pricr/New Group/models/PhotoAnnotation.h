@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Listing.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (strong,nonatomic) UIImageView *photo;
 @property (strong,nonatomic) NSString *caption;
+@property (strong,nonatomic) Listing *listing;
+
 
 @end
 

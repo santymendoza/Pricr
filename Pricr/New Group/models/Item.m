@@ -15,6 +15,8 @@
 @dynamic image;
 @dynamic createdAt;
 @dynamic prices;
+@dynamic name;
+
 
 
 + (nonnull NSString *)parseClassName {
@@ -29,9 +31,8 @@
     newItem.name = name;
     newItem.description = description;
     newItem.prices = prices;
-    [newItem saveInBackgroundWithBlock: completion];
+    [newItem saveInBackgroundWithBlock: completion];    
 }
-
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
  

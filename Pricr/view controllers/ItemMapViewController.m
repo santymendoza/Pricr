@@ -88,6 +88,7 @@
     [listingQuery orderByDescending:@"createdAt"];
     [listingQuery whereKey:@"objectId" equalTo:theID];
     [listingQuery includeKey:@"author"];
+    [listingQuery includeKey:@"objectId"];
     listingQuery.limit = 20;
 
     // fetch data asynchronously
@@ -97,11 +98,16 @@
             PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
             point.coordinate = self.coordinate;
             point.caption = listings[0].name;
+            point.listing = listings[0];
             
             NSURL *posterURL = [NSURL URLWithString:listings[0].image.url];
-            point.photo.image = nil;
-            [point.photo setImageWithURL: posterURL];
-            point.photo.image = [self resizeImage:point.photo.image withSize:CGSizeMake(50.0, 50.0)];
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:posterURL];
+            UIImage *image = [[UIImage alloc]initWithData:imageData];
+            UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+            resizeImageView.image = image;
+            
+            point.photo = resizeImageView;
             [self.mapView addAnnotation:point];
         }
         else {
@@ -141,9 +147,7 @@
 
 - (void) placeItems {
     for (id item in self.arrayOfItems) {
-        NSLog(@"%@",item[@"prices"][0]);
-        Item *newItem = item[@"prices"][0];
-        NSLog(@"%@",newItem.objectId);
+        Listing *newItem = item[@"prices"][0];
         [self getListing:newItem.objectId];
     }
 }
@@ -174,8 +178,7 @@
 - (void)mapView:(MKMapView *)mapView
  annotationView:(MKAnnotationView *)view
 calloutAccessoryControlTapped:(UIControl *)control{
-    //NSLog(@"%@",view);
-    [self performSegueWithIdentifier:@"annotationSelected" sender:nil];
+    [self performSegueWithIdentifier:@"annotationSelected" sender:view.annotation];
 }
 
 
@@ -202,10 +205,12 @@ calloutAccessoryControlTapped:(UIControl *)control{
 //#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(PhotoAnnotation *)sender {
     if ([segue.identifier isEqualToString:@"annotationSelected"]){
+       // NSLog(sender);
         itemDetailsViewController *dc = segue.destinationViewController;
-        //dc.item = ;
+        dc.listing = sender.listing;
+        
     }
 }
 

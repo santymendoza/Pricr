@@ -22,7 +22,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *results;
 @property (strong,nonatomic) CLLocationManager *locationManager;
-@property (strong,nonatomic)NSString *currentCity;
+@property (strong,nonatomic)NSString *locationString;
 @property (strong,nonatomic)CLLocation *currentLocation;
 
 
@@ -56,13 +56,16 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 }
 
 - (void) updateTable {
-    [self fetchLocationsWithQuery:@"Groceries" nearCity:self.currentCity];
+    [self fetchLocationsWithQuery:@"Groceries" nearLoc:self.locationString];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
     self.currentLocation = location;
+    NSNumber *myLat = [NSNumber numberWithDouble:location.coordinate.latitude];
+    NSNumber *myLon = [NSNumber numberWithDouble:location.coordinate.longitude];
+    self.locationString = [[[myLat stringValue] stringByAppendingString: @","] stringByAppendingString: [myLon stringValue]];
     NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
     
     //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
@@ -77,7 +80,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             self.currentCity = placemark.locality;
+             //self.currentCity = placemark.locality;
              [self updateTable];
          }
          else
@@ -114,17 +117,18 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    [self fetchLocationsWithQuery:newText nearCity:self.currentCity];
+    [self fetchLocationsWithQuery:newText nearLoc:self.locationString];
     return true;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
+    [self fetchLocationsWithQuery:searchBar.text nearLoc:self.locationString];
 }
 
-- (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
+- (void)fetchLocationsWithQuery:(NSString *)query nearLoc:(NSString *)latlon {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,CA&query=%@", clientID, clientSecret, city, query];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%@&query=%@", clientID, clientSecret, latlon, query];
+    //NSLog(queryString);
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -134,7 +138,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSLog(@"response: %@", responseDictionary);
+            //NSLog(@"response: %@", responseDictionary);
             self.results = [responseDictionary valueForKeyPath:@"response.venues"];
             [self.tableView reloadData];
         }

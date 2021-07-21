@@ -25,15 +25,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if(![self.item isEqual: nil]){
+        [self getItem];
+    }
+    [self makeDetails];
+}
+
+- (void) makeDetails{
     self.itemName.text = self.item[@"name"];
     self.itemDescription.text = self.item[@"description"];
     self.itemImage.file = self.item[@"image"];
     Listing *new = self.item[@"prices"][0];
-    NSLog(@"%@",new.price);
     self.itemPrice.text = new.price;
     [self.itemImage loadInBackground];
 }
-
+- (void) getItem{
+    PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
+    [itemQuery orderByDescending:@"createdAt"];
+    [itemQuery includeKey:@"prices"];
+    [itemQuery includeKey:@"objectId"];
+    itemQuery.limit = 20;
+    // fetch data asynchronously
+    [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
+        if (items) {
+            for (id item in items) {
+                for (id listing in item[@"prices"]){
+                    
+                    if ([listing[@"name"] isEqual: self.listing[@"name"]]){
+                        self.item = item;
+                        [self makeDetails];
+                    }
+                }
+            }
+        }
+        else {
+        }
+    }];
+    
+}
 /*
 #pragma mark - Navigation
 
