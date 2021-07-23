@@ -14,7 +14,7 @@
 @interface HomeCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *itemCollectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong,nonatomic) NSArray *arrayOfItems;
+@property (strong,nonatomic) NSMutableArray *arrayOfItems;
 
 
 
@@ -54,6 +54,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Do any additional setup after loading the view.
     [self getData];
+    [self.collectionView reloadData];
 }
 
 
@@ -64,14 +65,23 @@ static NSString * const reuseIdentifier = @"Cell";
     [itemQuery orderByDescending:@"createdAt"];
     [itemQuery includeKey:@"author"];
     [itemQuery includeKey:@"prices"];
+    [itemQuery includeKey:@"favoriters"];
     itemQuery.limit = 20;
+    self.arrayOfItems = [NSMutableArray new];
 
     // fetch data asynchronously
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
-            self.arrayOfItems = items;
-            [self.collectionView reloadData];
-            [self.refreshControl endRefreshing];
+            for (id item in items) {
+                for (id favoriter in item[@"favoriters"]){
+                    if (favoriter[@"objectId"] == PFUser.currentUser[@"objectId"]){
+                        [self.arrayOfItems addObject:item];
+                        [self.collectionView reloadData];
+                        [self.refreshControl endRefreshing];
+                    }
+                }
+            }
+            NSLog(@"%@",self.arrayOfItems);
         }
         else {
             // handle error

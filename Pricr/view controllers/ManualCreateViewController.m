@@ -40,8 +40,6 @@
     self.itemLocation.text = self.venue[@"name"];
     [self dismissViewControllerAnimated:YES completion:nil];
 
-
-    
 }
 
 - (IBAction)imageHit:(id)sender {
@@ -103,6 +101,7 @@
 
 - (IBAction)postButtonPressed:(id)sender {
     NSMutableArray *arrOfPrices = [NSMutableArray new];
+    NSMutableArray *favoriters = [NSMutableArray new];
     Listing *newListing = [Listing new];
     newListing.price = self.itemPrice.text;
     newListing.venue = self.venue;
@@ -118,7 +117,7 @@
         } else{
             NSLog(@"did not post item!");
         }
-    } withName:self.itemName.text withPrices:arrOfPrices];
+    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters];
 
 
 }

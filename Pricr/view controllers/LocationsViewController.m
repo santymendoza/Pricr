@@ -56,7 +56,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 }
 
 - (void) updateTable {
-    [self fetchLocationsWithQuery:@"Groceries" nearLoc:self.locationString];
+    [self fetchLocationsWithQuery:@"" nearLoc:self.locationString];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -127,7 +127,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
 
 - (void)fetchLocationsWithQuery:(NSString *)query nearLoc:(NSString *)latlon {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%@&query=%@", clientID, clientSecret, latlon, query];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%@&query=%@&categoryId=4bf58dd8d48988d118951735&sortByDistance=1&radius=100000", clientID, clientSecret, latlon, query];
     //NSLog(queryString);
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
@@ -138,7 +138,7 @@ static NSString * const clientSecret = @"W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            //NSLog(@"response: %@", responseDictionary);
+            NSLog(@"response: %@", responseDictionary);
             self.results = [responseDictionary valueForKeyPath:@"response.venues"];
             [self.tableView reloadData];
         }

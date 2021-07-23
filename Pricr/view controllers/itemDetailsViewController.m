@@ -14,6 +14,7 @@
 
 @interface itemDetailsViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 @property (weak, nonatomic) IBOutlet UILabel *itemDescription;
 @property (weak, nonatomic) IBOutlet UILabel *itemPrice;
@@ -21,6 +22,22 @@
 @end
 
 @implementation itemDetailsViewController
+- (IBAction)favorited:(id)sender {
+    [self likeItem: _item];
+}
+
+- (void) likeItem:(Item *)item {
+    if (item.favoriters == nil) {
+        item.favoriters = [NSMutableArray new];
+        [item[@"favoriters"] addObject:PFUser.currentUser];
+    }
+    else if (![item.favoriters containsObject:PFUser.currentUser]){
+        [item[@"favoriters"] addObject:PFUser.currentUser];
+    }
+    [self.favoriteButton setSelected:TRUE];
+    [item saveInBackground];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,10 +48,22 @@
     [self makeDetails];
 }
 
+- (BOOL) isFavorited: (NSMutableArray *) favoriters {
+    for (id favoriter in favoriters){
+        if (favoriter[@"objectId"] == PFUser.currentUser[@"objectId"]){
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 - (void) makeDetails{
     self.itemName.text = self.item[@"name"];
     self.itemDescription.text = self.item[@"description"];
     self.itemImage.file = self.item[@"image"];
+    if ([self isFavorited:self.item[@"favoriters"]]){
+        [self.favoriteButton setSelected:TRUE];
+    }
     Listing *new = self.item[@"prices"][0];
     self.itemPrice.text = new.price;
     [self.itemImage loadInBackground];
@@ -43,6 +72,7 @@
     PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
     [itemQuery orderByDescending:@"createdAt"];
     [itemQuery includeKey:@"prices"];
+    [itemQuery includeKey:@"favoriters"];
     [itemQuery includeKey:@"objectId"];
     itemQuery.limit = 20;
     // fetch data asynchronously

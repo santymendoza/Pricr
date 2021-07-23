@@ -13,6 +13,7 @@
 #import <Parse/Parse.h>
 #import "Item.h"
 #import "Listing.h"
+#import <QuartzCore/QuartzCore.h>
 #import "itemDetailsViewController.h"
 
 
@@ -35,6 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mapView.delegate = self;
+   // self.mapView.animatesDrop = TRUE;
+    self.mapView.showsUserLocation = TRUE;
+    //self.mapView.
+
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -62,7 +67,6 @@
     //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
     MKCoordinateRegion userRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
     [self.mapView setRegion:userRegion animated:false];
-    
     [self.locationManager stopUpdatingLocation];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
@@ -157,21 +161,32 @@
 
 }
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    if ([annotation isKindOfClass:MKUserLocation.class]) {
+        //user location view is being requested,
+        //return nil so it uses the default which is a blue dot...
+        return nil;
+    }
     if (annotationView == nil) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
         annotationView.canShowCallout = true;
+        
         annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
 
     UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
-    // imageView.image = [UIImage imageNamed:@"camera-icon"]; // remove this line
 
     // add these two lines below
     PhotoAnnotation *photoAnnotationItem = annotation; // refer to this generic annotation as our more specific PhotoAnnotation
     imageView.image = photoAnnotationItem.photo.image; // set the image into the callout imageview
+    [annotationView.layer setBorderWidth:2.0f];
+    [annotationView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    annotationView.image = [self imageWithImage:photoAnnotationItem.photo.image convertToSize:CGSizeMake(50.0, 50.0)];
+    
+    [annotationView.layer setCornerRadius: annotationView.frame.size.height/2.0];
 
+    
     return annotationView;
  }
 
@@ -181,6 +196,13 @@ calloutAccessoryControlTapped:(UIControl *)control{
     [self performSegueWithIdentifier:@"annotationSelected" sender:view.annotation];
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+}
 
 - (void) getData {
     // construct PFQuery

@@ -13,6 +13,7 @@
 @dynamic author;
 @dynamic description;
 @dynamic image;
+@dynamic favoriters;
 @dynamic createdAt;
 @dynamic prices;
 @dynamic name;
@@ -23,12 +24,13 @@
     return @"Item";
 }
 
-+ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices {
++ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices withFavoriters: (NSMutableArray * _Nullable )favoriters{
     
     Item *newItem = [Item new];
     newItem.image = [self getPFFileFromImage:image];
     newItem.author = [PFUser currentUser];
     newItem.name = name;
+    newItem.favoriters = favoriters;
     newItem.description = description;
     newItem.prices = prices;
     [newItem saveInBackgroundWithBlock: completion];    

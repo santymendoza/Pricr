@@ -42,11 +42,12 @@
 
 - (IBAction)postPressed:(id)sender {
     NSMutableArray *arrOfPrices = [NSMutableArray new];
+    NSMutableArray *favoriters = [NSMutableArray new];
     Listing *newListing = [Listing new];
     newListing.price = self.itemPrice.text;
     newListing.venue = self.venue;
     newListing.name = self.itemName.text;
-    //newListing.image= [self getPFFileFromImage:self.selectedImage];
+    newListing.image= [self getPFFileFromImage:self.itemImage.image];
     newListing.author = PFUser.currentUser;
     [arrOfPrices addObject:newListing];
     
@@ -57,20 +58,37 @@
         } else{
             NSLog(@"did not post image!");
         }
-    } withName:self.itemName.text withPrices:arrOfPrices];
+    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters];
 
-    self.tabBarController.selectedViewController
-        = [self.tabBarController.viewControllers objectAtIndex:0];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+ 
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 - (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude venue:(NSDictionary *)venue{
     [self.navigationController popViewControllerAnimated:YES];
     
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
+    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
     //NSLog(@"%@",venue);
     self.venue = venue;
     self.itemLocation.text = self.venue[@"name"];
-    [self dismissViewControllerAnimated:YES completion:nil]; 
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
@@ -125,14 +143,16 @@
     self.itemImage.image = nil;
     [self.itemImage setImageWithURL: itemURL];
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"tagSegue"]) {
+            LocationsViewController *vc = segue.destinationViewController;
+            vc.delegate = self;
+        }
 }
-*/
+
 
 @end
