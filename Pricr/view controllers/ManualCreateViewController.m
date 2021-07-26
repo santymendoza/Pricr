@@ -117,7 +117,7 @@
         } else{
             NSLog(@"did not post item!");
         }
-    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters];
+    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters withCategories:[NSArray new]];
 
 
 }

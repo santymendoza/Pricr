@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *itemPrice;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
-
+@property (strong, nonatomic) NSArray *itemCategories;
 @end
 
 @implementation ScannerResultsViewController
@@ -58,7 +58,7 @@
         } else{
             NSLog(@"did not post image!");
         }
-    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters];
+    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters withCategories:self.itemCategories];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -83,8 +83,8 @@
 - (void)locationsViewController:(LocationsViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude venue:(NSDictionary *)venue{
     [self.navigationController popViewControllerAnimated:YES];
     
-    //CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
-    //NSLog(@"%@",venue);
+
+    
     self.venue = venue;
     self.itemLocation.text = self.venue[@"name"];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -134,11 +134,16 @@
 
 }
 
+
+- (NSArray *) makeListOfCategories: (NSString *) categories{
+    return [categories componentsSeparatedByString:@" > "];
+    
+}
+
 - (void) updateView: (NSDictionary *) data{
     self.itemName.text = data[@"items"][0][@"brand"];
     self.itemDescription.text = data[@"items"][0][@"description"];
-    
-    //NSLog(@"%@",data[@"items"][0][@"images"][0]);
+    self.itemCategories = [self makeListOfCategories:data[@"items"][0][@"category"]];
     NSURL *itemURL = [NSURL URLWithString:data[@"items"][0][@"images"][0]];
     self.itemImage.image = nil;
     [self.itemImage setImageWithURL: itemURL];

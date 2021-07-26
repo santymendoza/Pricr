@@ -17,6 +17,8 @@
 @dynamic createdAt;
 @dynamic prices;
 @dynamic name;
+@dynamic categories;
+@dynamic relatedItems;
 
 
 
@@ -24,7 +26,7 @@
     return @"Item";
 }
 
-+ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices withFavoriters: (NSMutableArray * _Nullable )favoriters{
++ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices withFavoriters: (NSMutableArray * _Nullable )favoriters withCategories:(NSArray * _Nullable)categories {
     
     Item *newItem = [Item new];
     newItem.image = [self getPFFileFromImage:image];
@@ -33,6 +35,8 @@
     newItem.favoriters = favoriters;
     newItem.description = description;
     newItem.prices = prices;
+    newItem.categories = categories;
+    newItem.relatedItems = [self setRelatedItems:newItem];
     [newItem saveInBackgroundWithBlock: completion];    
 }
 
@@ -51,5 +55,41 @@
     
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
+
++ (NSInteger) numberOfSimilarCategories: (NSArray *)array1 array2:(NSArray *)array2{
+    NSMutableSet* set1 = [NSMutableSet setWithArray:array1];
+    NSSet* set2 = [NSMutableSet setWithArray:array2];
+    [set1 intersectSet:set2]; //this will give you only the obejcts that are in both sets
+
+    NSArray* result = [set1 allObjects];
+    return result.count;
+}
+
++ (NSMutableArray *) setRelatedItems: (Item *) postedItem{
+    NSUInteger sizeOfArray = 10;
+    NSMutableArray *relatedItems = [NSMutableArray array];
+    for (NSUInteger i = 0; i < sizeOfArray; i++) {
+        [relatedItems addObject:[NSMutableArray new]];
+    }    PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
+    [itemQuery orderByDescending:@"createdAt"];
+    [itemQuery includeKey:@"prices"];
+    [itemQuery includeKey:@"favoriters"];
+    [itemQuery includeKey:@"objectId"];
+    [itemQuery includeKey:@"categories"];
+    itemQuery.limit = 20;
+    // fetch data asynchronously
+    [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
+        if (items) {
+            for (id item in items) {
+                NSInteger numOfCats = [self numberOfSimilarCategories:postedItem.categories array2:item[@"categories"]];
+                [relatedItems[numOfCats] addObject:item];
+            }
+        }
+        else {
+        }
+    }];
+    return relatedItems;
+}
+
 
 @end

@@ -73,15 +73,16 @@ static NSString * const reuseIdentifier = @"Cell";
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
             for (id item in items) {
-                for (id favoriter in item[@"favoriters"]){
-                    if (favoriter[@"objectId"] == PFUser.currentUser[@"objectId"]){
+                for (PFUser *favoriter in item[@"favoriters"]){
+                    if ([favoriter.objectId isEqual: PFUser.currentUser.objectId]){
+                        NSLog(@"%@",PFUser.currentUser.objectId);
+                        NSLog(@"%@",favoriter.objectId);
                         [self.arrayOfItems addObject:item];
                         [self.collectionView reloadData];
                         [self.refreshControl endRefreshing];
                     }
                 }
             }
-            NSLog(@"%@",self.arrayOfItems);
         }
         else {
             // handle error

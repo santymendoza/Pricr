@@ -27,30 +27,48 @@
 }
 
 - (void) likeItem:(Item *)item {
-    if (item.favoriters == nil) {
-        item.favoriters = [NSMutableArray new];
-        [item[@"favoriters"] addObject:PFUser.currentUser];
+    if (![self isFavorited:self.item.favoriters]){
+
+        if (item.favoriters == nil) {
+            item.favoriters = [NSMutableArray new];
+            [item[@"favoriters"] addObject:PFUser.currentUser];
+        }
+        else if (![item.favoriters containsObject:PFUser.currentUser]){
+            NSMutableArray *tst = item.favoriters;
+            item.favoriters = [NSMutableArray new];
+            item.favoriters = tst;
+            [item[@"favoriters"] addObject:PFUser.currentUser];
+        }
+        [self.favoriteButton setSelected:TRUE];
     }
-    else if (![item.favoriters containsObject:PFUser.currentUser]){
-        [item[@"favoriters"] addObject:PFUser.currentUser];
+    else{
+        NSUInteger *index = 0;
+        for (PFUser *favoriter in item[@"favoriters"]){
+            if ([favoriter.objectId isEqual: PFUser.currentUser.objectId]){
+                NSMutableArray *test = item.favoriters;
+                item.favoriters = [NSMutableArray new];
+                item.favoriters = test;
+                [item[@"favoriters"] removeObjectAtIndex: index];
+            }
+            index++;
+        }
+        [self.favoriteButton setSelected:FALSE];
     }
-    [self.favoriteButton setSelected:TRUE];
     [item saveInBackground];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if(![self.item isEqual: nil]){
         [self getItem];
     }
     [self makeDetails];
 }
-
 - (BOOL) isFavorited: (NSMutableArray *) favoriters {
-    for (id favoriter in favoriters){
-        if (favoriter[@"objectId"] == PFUser.currentUser[@"objectId"]){
+    
+    for (PFUser *favoriter in favoriters){
+        if ([favoriter.objectId isEqual: PFUser.currentUser.objectId]){
             return TRUE;
         }
     }
@@ -61,7 +79,7 @@
     self.itemName.text = self.item[@"name"];
     self.itemDescription.text = self.item[@"description"];
     self.itemImage.file = self.item[@"image"];
-    if ([self isFavorited:self.item[@"favoriters"]]){
+    if ([self isFavorited:self.item.favoriters]){
         [self.favoriteButton setSelected:TRUE];
     }
     Listing *new = self.item[@"prices"][0];
@@ -91,8 +109,9 @@
         else {
         }
     }];
-    
 }
+
+
 /*
 #pragma mark - Navigation
 
