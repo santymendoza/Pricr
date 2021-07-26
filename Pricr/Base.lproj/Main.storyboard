@@ -479,6 +479,7 @@
                         <outlet property="itemImage" destination="szV-X6-0eM" id="SWV-mR-7gt"/>
                         <outlet property="itemName" destination="pf2-zN-rKT" id="Smg-N2-kwM"/>
                         <outlet property="itemPrice" destination="w4o-zK-T7o" id="DZ2-2x-IG8"/>
+                        <outlet property="relatedItemsCollection" destination="zh6-Ri-1lK" id="wo9-ef-Nly"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icr-0M-OXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

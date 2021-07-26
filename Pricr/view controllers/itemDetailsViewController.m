@@ -10,14 +10,18 @@
 #import "LoginViewController.h"
 #import "ItemCollectionViewCell.h"
 #import "Item.h"
+#import "RelatedCollectionViewCell.h"
 #import "Listing.h"
 
-@interface itemDetailsViewController ()
+@interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 @property (weak, nonatomic) IBOutlet UILabel *itemDescription;
+@property (weak, nonatomic) IBOutlet UICollectionView *relatedItemsCollection;
 @property (weak, nonatomic) IBOutlet UILabel *itemPrice;
+@property (strong,nonatomic) NSArray *arrayOfItems;
+
 
 @end
 
@@ -64,6 +68,8 @@
         [self getItem];
     }
     [self makeDetails];
+    self.relatedItemsCollection.delegate = self;
+    self.relatedItemsCollection.dataSource = self;
 }
 - (BOOL) isFavorited: (NSMutableArray *) favoriters {
     
@@ -111,6 +117,20 @@
     }];
 }
 
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+     RelatedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"relatedCell" forIndexPath:indexPath];
+    
+    Item *item = self.arrayOfItems[indexPath.item];
+    
+    [cell setItem:item];
+    
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return  self.arrayOfItems.count;
+}
 
 /*
 #pragma mark - Navigation
