@@ -439,7 +439,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qvk-j2-VfF" customClass="ItemCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="relatedCell" id="qvk-j2-VfF" customClass="RelatedCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="114" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="sTS-Ka-IIj">
@@ -460,6 +460,10 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="114" height="128"/>
+                                        <connections>
+                                            <outlet property="itemImage" destination="VRt-bu-xFw" id="LzE-SK-Nad"/>
+                                            <outlet property="itemName" destination="cOK-Tf-orB" id="YrB-cp-aPm"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

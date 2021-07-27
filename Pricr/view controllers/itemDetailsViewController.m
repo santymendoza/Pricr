@@ -70,6 +70,7 @@
     [self makeDetails];
     self.relatedItemsCollection.delegate = self;
     self.relatedItemsCollection.dataSource = self;
+    [self getRelatedItems];
 }
 - (BOOL) isFavorited: (NSMutableArray *) favoriters {
     
@@ -111,6 +112,45 @@
                     }
                 }
             }
+        }
+        else {
+        }
+    }];
+}
+
+- (void) getRelatedItems{
+    NSUInteger sizeOfArray = 3;
+    NSMutableArray *relatedItems = [NSMutableArray array];
+    NSMutableArray *relatedItemObjects = [NSMutableArray array];
+    for (id itemList in [self.item.relatedItems reverseObjectEnumerator]){
+        if(itemList != nil){
+            for (id item in itemList){
+                if(sizeOfArray != 0){
+                    [relatedItems addObject:item];
+                    sizeOfArray--;
+                }
+            }
+        }
+    }
+    PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
+    [itemQuery orderByDescending:@"createdAt"];
+    [itemQuery includeKey:@"prices"];
+    [itemQuery includeKey:@"favoriters"];
+    [itemQuery includeKey:@"objectId"];
+    itemQuery.limit = 3;
+    // fetch data asynchronously
+    [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
+        if (items) {
+            for (Item *item in items) {
+                for (Item *relatedItem in relatedItems){
+                    if ([relatedItem.objectId isEqual:item.objectId]){
+                        [relatedItemObjects addObject:item];
+                    }
+                }
+            }
+            self.arrayOfItems = relatedItemObjects;
+            [self.relatedItemsCollection reloadData];
+
         }
         else {
         }
