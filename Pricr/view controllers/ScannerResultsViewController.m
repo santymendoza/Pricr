@@ -61,6 +61,7 @@
     } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters withCategories:self.itemCategories];
 
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 

@@ -70,8 +70,31 @@
     [self makeDetails];
     self.relatedItemsCollection.delegate = self;
     self.relatedItemsCollection.dataSource = self;
+    
+    
+    //layout stuff
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.relatedItemsCollection.collectionViewLayout;
+    layout.minimumInteritemSpacing = 2;
+    layout.minimumLineSpacing = 2;
+    
+    CGFloat itemsPerLine = 3;
+    CGFloat itemWidth = (self.relatedItemsCollection.frame.size.width - layout.minimumInteritemSpacing * (itemsPerLine - 1)) / itemsPerLine;
+    CGFloat itemHeight = itemWidth * 1.5;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
+    //double tap to like
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:doubleTap];
+    
     [self getRelatedItems];
 }
+- (void)handleTapGesture:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
+        [self likeItem: _item];
+    }
+}
+
 - (BOOL) isFavorited: (NSMutableArray *) favoriters {
     
     for (PFUser *favoriter in favoriters){
@@ -119,7 +142,7 @@
 }
 
 - (void) getRelatedItems{
-    NSUInteger sizeOfArray = 3;
+    NSUInteger sizeOfArray = 4;
     NSMutableArray *relatedItems = [NSMutableArray array];
     NSMutableArray *relatedItemObjects = [NSMutableArray array];
     for (id itemList in [self.item.relatedItems reverseObjectEnumerator]){
@@ -137,7 +160,7 @@
     [itemQuery includeKey:@"prices"];
     [itemQuery includeKey:@"favoriters"];
     [itemQuery includeKey:@"objectId"];
-    itemQuery.limit = 3;
+    itemQuery.limit = 4;
     // fetch data asynchronously
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
@@ -170,6 +193,18 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return  self.arrayOfItems.count;
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    UITableView *tappedCell = sender;
+    NSIndexPath *indexPath = [self.relatedItemsCollection indexPathForCell: tappedCell];
+    NSDictionary *item = self.arrayOfItems[indexPath.item];
+    
+    itemDetailsViewController *detailViewController = [segue destinationViewController];
+    detailViewController.item = item;
 }
 
 /*
