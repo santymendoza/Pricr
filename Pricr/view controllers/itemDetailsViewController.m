@@ -12,6 +12,9 @@
 #import "Item.h"
 #import "RelatedCollectionViewCell.h"
 #import "Listing.h"
+#import <WebBrowser/WebBrowser-umbrella.h>
+#import <KINWebBrowser/KINWebBrowserViewController.h>
+#import <WebKit/WebKit.h>
 
 @interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
@@ -103,6 +106,14 @@
         }
     }
     return FALSE;
+}
+- (IBAction)searchTarget:(id)sender {
+    UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
+    [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
+
+    KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowser];
+    [webBrowser loadURLString:@"http://www.target.com"];
+    
 }
 
 - (void) makeDetails{
