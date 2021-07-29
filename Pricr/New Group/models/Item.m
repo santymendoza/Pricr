@@ -19,6 +19,7 @@
 @dynamic name;
 @dynamic categories;
 @dynamic relatedItems;
+@dynamic searchTitle;
 
 
 
@@ -26,7 +27,7 @@
     return @"Item";
 }
 
-+ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices withFavoriters: (NSMutableArray * _Nullable )favoriters withCategories:(NSArray * _Nullable)categories {
++ (void) postUserItem: ( UIImage * _Nullable )image withDescription: ( NSString * _Nullable )description withSearchTitle: ( NSString * _Nullable )searchTitle withCompletion: (PFBooleanResultBlock  _Nullable)completion withName: (NSString * _Nullable )name withPrices: (NSMutableArray * _Nullable )prices withFavoriters: (NSMutableArray * _Nullable )favoriters withCategories: (NSArray * _Nullable )categories {
     
     Item *newItem = [Item new];
     newItem.image = [self getPFFileFromImage:image];
@@ -37,6 +38,7 @@
     newItem.prices = prices;
     newItem.categories = categories;
     newItem.relatedItems = [self setRelatedItems:newItem];
+    newItem.searchTitle = searchTitle;
     [self setItemAsSimilar:newItem];
     [newItem saveInBackgroundWithBlock: completion];    
 }

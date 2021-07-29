@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UITextView *itemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 @property (strong, nonatomic) NSArray *itemCategories;
+@property (strong, nonatomic) NSString *searchTitle;
+
+
 @end
 
 @implementation ScannerResultsViewController
@@ -51,7 +54,7 @@
     newListing.author = PFUser.currentUser;
     [arrOfPrices addObject:newListing];
     
-    [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withSearchTitle:self.searchTitle withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"successfully uploaded an item!");
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -143,6 +146,7 @@
 
 - (void) updateView: (NSDictionary *) data{
     self.itemName.text = data[@"items"][0][@"brand"];
+    self.searchTitle = data[@"items"][0][@"title"];
     self.itemDescription.text = data[@"items"][0][@"description"];
     self.itemCategories = [self makeListOfCategories:data[@"items"][0][@"category"]];
     NSURL *itemURL = [NSURL URLWithString:data[@"items"][0][@"images"][0]];

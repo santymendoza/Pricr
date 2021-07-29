@@ -16,7 +16,7 @@
 #import <KINWebBrowser/KINWebBrowserViewController.h>
 #import <WebKit/WebKit.h>
 
-@interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource, WKNavigationDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *relatedItemsCollection;
 @property (weak, nonatomic) IBOutlet UILabel *itemPrice;
 @property (strong,nonatomic) NSArray *arrayOfItems;
+@property (strong,nonatomic) WKWebView *webview;
+
 
 
 @end
@@ -108,12 +110,21 @@
     return FALSE;
 }
 - (IBAction)searchTarget:(id)sender {
-    UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
-    [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
-
-    KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowser];
-    [webBrowser loadURLString:@"http://www.target.com"];
-    
+    self.webview = [WKWebView new];
+    self.webview.navigationDelegate = self;
+    self.view = self.webview;
+    NSURL *url = [NSURL URLWithString:[@"https://www.target.com/s?searchTerm=" stringByAppendingString:[self.item.searchTitle stringByReplacingOccurrencesOfString:@" "withString:@"+"]]];
+    [self.webview loadRequest:[NSURLRequest requestWithURL:url]];
+    self.webview.allowsBackForwardNavigationGestures = TRUE;
+   
+}
+- (IBAction)searchWalmart:(id)sender {
+    self.webview = [WKWebView new];
+    self.webview.navigationDelegate = self;
+    self.view = self.webview;
+    NSURL *url = [NSURL URLWithString:[@"https://www.walmart.com/search/?query=" stringByAppendingString:[self.item.searchTitle stringByReplacingOccurrencesOfString:@" "withString:@"%20"]]];
+    [self.webview loadRequest:[NSURLRequest requestWithURL:url]];
+    self.webview.allowsBackForwardNavigationGestures = TRUE;
 }
 
 - (void) makeDetails{

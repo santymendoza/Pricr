@@ -110,7 +110,7 @@
     newListing.author = PFUser.currentUser;
     [arrOfPrices addObject:newListing];
     
-    [Item postUserItem:self.selectedImage withDescription:self.itemDescription.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Item postUserItem:self.selectedImage withDescription:self.itemDescription.text withSearchTitle:@"" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"successfully uploaded an item!");
             [self dismissViewControllerAnimated:YES completion:nil];
