@@ -21,6 +21,8 @@
 @property (strong,nonatomic) NSArray *arrayOfItems;
 @property (weak, nonatomic) IBOutlet PFImageView *profilePic;
 @property (strong,nonatomic) PFUser *user;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numItemsLabel;
 
 
 
@@ -34,8 +36,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     self.user = PFUser.currentUser;
     self.name.text = self.user.username;
+    self.pointsLabel.text = self.user[@"name"];
     self.profilePic.file = self.user[@"profilePic"];
-    self.profilePic.frame = CGRectMake(0, 0, 175, 175);
     self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width * .5;
     self.profilePic.clipsToBounds = YES;
     [self.profilePic loadInBackground];
@@ -92,6 +94,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
             self.arrayOfItems = items;
+            self.numItemsLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfItems.count];
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
         }
