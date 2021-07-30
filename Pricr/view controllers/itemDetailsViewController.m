@@ -164,15 +164,14 @@
 }
 
 - (void) getRelatedItems{
-    NSUInteger sizeOfArray = 4;
+    NSUInteger sizeOfArray = 3;
     NSMutableArray *relatedItems = [NSMutableArray array];
     NSMutableArray *relatedItemObjects = [NSMutableArray array];
-    for (id itemList in [self.item.relatedItems reverseObjectEnumerator]){
-        if(itemList != nil){
+    for (NSArray *itemList in [self.item.relatedItems reverseObjectEnumerator]){
+        if(itemList.count != 0){
             for (id item in itemList){
-                if(sizeOfArray != 0){
+                if(relatedItems.count != sizeOfArray){
                     [relatedItems addObject:item];
-                    sizeOfArray--;
                 }
             }
         }
@@ -182,7 +181,7 @@
     [itemQuery includeKey:@"prices"];
     [itemQuery includeKey:@"favoriters"];
     [itemQuery includeKey:@"objectId"];
-    itemQuery.limit = 4;
+    itemQuery.limit = 20;
     // fetch data asynchronously
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {

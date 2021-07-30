@@ -15,8 +15,8 @@
 @interface SearchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *itemCollectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong,nonatomic) NSArray *arrayOfItems;
-@property (strong,nonatomic) NSArray *filteredItems;
+@property (strong,nonatomic) NSMutableArray *arrayOfItems;
+@property (strong,nonatomic) NSMutableArray *filteredItems;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
@@ -46,6 +46,8 @@ static NSString * const reuseIdentifier = @"Cell";
     CGFloat itemHeight = itemWidth * 1.75;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
+    
+    
     // Register cell classes
     [self.itemCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -53,6 +55,19 @@ static NSString * const reuseIdentifier = @"Cell";
     [self getData];
 }
 
+- (void) eliminateListings{
+    for (Item *item in self.arrayOfItems){
+        for (Item *item2 in self.arrayOfItems){
+            if (item.name == item2.name && item != item2){
+                NSLog(@"%@",item.name);
+                NSLog(@"%@",item.itemID);
+                NSLog(@"%@",item2.name);
+                NSLog(@"%@",item2.itemID);
+
+            }
+        }
+    }
+}
 
 
 - (void) getData {
@@ -66,7 +81,9 @@ static NSString * const reuseIdentifier = @"Cell";
     // fetch data asynchronously
     [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
         if (items) {
+            
             self.arrayOfItems = items;
+            [self eliminateListings];
             self.filteredItems = self.arrayOfItems;
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
@@ -78,11 +95,10 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+
     if (searchText.length != 0){
-        
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
         self.filteredItems = [self.arrayOfItems filteredArrayUsingPredicate:predicate];
-        NSLog(@"%@", self.filteredItems);
     }
     else{
         self.filteredItems = self.arrayOfItems;
