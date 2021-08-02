@@ -10,6 +10,8 @@
 		253C959EFFE46D9B702A52EA /* Pods_Pricr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159F23A3714998FA3F6DBBCB /* Pods_Pricr.framework */; };
 		3585A68E0BC3A437C6F70664 /* Pods_PricrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */; };
 		5D45ECBCBA410520AEF97884 /* Pods_Pricr_PricrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */; };
+		F97413DC26B868A700AFCA56 /* ListingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F97413DB26B868A700AFCA56 /* ListingsViewController.m */; };
+		F97413DF26B86C4700AFCA56 /* ListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F97413DE26B86C4700AFCA56 /* ListingTableViewCell.m */; };
 		F98C950026A0C1CD00FCB7D7 /* itemDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C94FF26A0C1CD00FCB7D7 /* itemDetailsViewController.m */; };
 		F98C950326A1F00F00FCB7D7 /* ItemMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C950226A1F00F00FCB7D7 /* ItemMapViewController.m */; };
 		F98C950626A1F18300FCB7D7 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C950526A1F18300FCB7D7 /* LocationsViewController.m */; };
@@ -64,6 +66,10 @@
 		C3DB903047B92E8CBC8CFDF8 /* Pods_PricrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PricrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B9CB857EB848A8A98024F7 /* Pods_Pricr_PricrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pricr_PricrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0752DEAF778032BB6043BE8 /* Pods-Pricr-PricrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pricr-PricrUITests.release.xcconfig"; path = "Target Support Files/Pods-Pricr-PricrUITests/Pods-Pricr-PricrUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F97413DA26B868A700AFCA56 /* ListingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListingsViewController.h; sourceTree = "<group>"; };
+		F97413DB26B868A700AFCA56 /* ListingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListingsViewController.m; sourceTree = "<group>"; };
+		F97413DD26B86C4700AFCA56 /* ListingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListingTableViewCell.h; sourceTree = "<group>"; };
+		F97413DE26B86C4700AFCA56 /* ListingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListingTableViewCell.m; sourceTree = "<group>"; };
 		F98C94FE26A0C1CD00FCB7D7 /* itemDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itemDetailsViewController.h; sourceTree = "<group>"; };
 		F98C94FF26A0C1CD00FCB7D7 /* itemDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itemDetailsViewController.m; sourceTree = "<group>"; };
 		F98C950126A1F00F00FCB7D7 /* ItemMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemMapViewController.h; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 				F9CC03D2269CE7C800844377 /* ProfileViewController.m */,
 				F9CC03DF269E429700844377 /* ScannerViewController.h */,
 				F9CC03E0269E429700844377 /* ScannerViewController.m */,
+				F97413DA26B868A700AFCA56 /* ListingsViewController.h */,
+				F97413DB26B868A700AFCA56 /* ListingsViewController.m */,
 			);
 			path = "view controllers";
 			sourceTree = "<group>";
@@ -264,6 +272,8 @@
 				F98C951426AF7A9900FCB7D7 /* RelatedCollectionViewCell.m */,
 				F98C950726A1F7EB00FCB7D7 /* LocationViewCell.h */,
 				F98C950826A1F7EB00FCB7D7 /* LocationViewCell.m */,
+				F97413DD26B86C4700AFCA56 /* ListingTableViewCell.h */,
+				F97413DE26B86C4700AFCA56 /* ListingTableViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -521,6 +531,7 @@
 			files = (
 				F98C950F26A2361900FCB7D7 /* Listing.m in Sources */,
 				F9CC03E4269F4E0D00844377 /* ScannerResultsViewController.m in Sources */,
+				F97413DC26B868A700AFCA56 /* ListingsViewController.m in Sources */,
 				F98C950926A1F7EB00FCB7D7 /* LocationViewCell.m in Sources */,
 				F9CC03D9269CEEEF00844377 /* Item.m in Sources */,
 				F98C950626A1F18300FCB7D7 /* LocationsViewController.m in Sources */,
@@ -538,6 +549,7 @@
 				F9CC03CF269CE49400844377 /* ItemCollectionViewCell.m in Sources */,
 				F9CC03C8269CAE3400844377 /* SignupViewController.m in Sources */,
 				F9CC03E1269E429700844377 /* ScannerViewController.m in Sources */,
+				F97413DF26B86C4700AFCA56 /* ListingTableViewCell.m in Sources */,
 				F9CC03CC269CE42E00844377 /* HomeCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

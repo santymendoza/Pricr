@@ -15,6 +15,7 @@
 #import <WebBrowser/WebBrowser-umbrella.h>
 #import <KINWebBrowser/KINWebBrowserViewController.h>
 #import <WebKit/WebKit.h>
+#import "ListingsViewController.h"
 
 @interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource, WKNavigationDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
@@ -220,12 +221,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UITableView *tappedCell = sender;
-    NSIndexPath *indexPath = [self.relatedItemsCollection indexPathForCell: tappedCell];
-    NSDictionary *item = self.arrayOfItems[indexPath.item];
-    
-    itemDetailsViewController *detailViewController = [segue destinationViewController];
-    detailViewController.item = item;
+    ListingsViewController *listingView = [segue destinationViewController];
+    listingView.item = self.item;
 }
 
 /*

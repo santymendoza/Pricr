@@ -55,19 +55,20 @@ static NSString * const reuseIdentifier = @"Cell";
     [self getData];
 }
 
-- (void) eliminateListings{
-    for (Item *item in self.arrayOfItems){
-        for (Item *item2 in self.arrayOfItems){
-            if (item.name == item2.name && item != item2){
-                NSLog(@"%@",item.name);
-                NSLog(@"%@",item.itemID);
-                NSLog(@"%@",item2.name);
-                NSLog(@"%@",item2.itemID);
-
-            }
-        }
-    }
-}
+//- (void) eliminateListings{
+//    NSMutableArray *arr = [NSMutableArray new];
+//
+//    for (Item *item in self.arrayOfItems){
+//        [arr addObject:item];
+//        for (Item *item2 in self.arrayOfItems){
+//            if (item.name == item2.name && item != item2){
+//                [arr removeObject:item];
+//            }
+//        }
+//    }
+//    self.arrayOfItems = arr;
+//
+//}
 
 
 - (void) getData {
@@ -83,7 +84,7 @@ static NSString * const reuseIdentifier = @"Cell";
         if (items) {
             
             self.arrayOfItems = items;
-            [self eliminateListings];
+            //[self eliminateListings];
             self.filteredItems = self.arrayOfItems;
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
