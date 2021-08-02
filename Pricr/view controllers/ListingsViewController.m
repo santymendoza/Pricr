@@ -8,12 +8,15 @@
 #import "ListingsViewController.h"
 #import "ListingTableViewCell.h"
 #import "Listing.h"
+#import <MapKit/MapKit.h>
 
 
 @interface ListingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *arrayOfListings;
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+
 @end
 
 @implementation ListingsViewController
@@ -65,6 +68,21 @@
     return cell;
 }
 
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+
+//    Listing *lstng = self.arrayOfListings[indexPath.row];
+//    self.coordinate = CLLocationCoordinate2DMake([lstng.venue[@"location"][@"lat"] floatValue], [lstng.venue[@"location"][@"lng"] floatValue]);
+//    CLLocationDistance regionDist = 1000;
+//    MKCoordinateRegion regionSpan = MKCoordinateRegionMakeWithDistance(self.coordinate, regionDist, regionDist);
+////    NSString *options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate:regionSpan.center)];
+//    CLPlacemark *place = [CLPlacemark new];
+}
+    
 /*
 #pragma mark - Navigation
 
