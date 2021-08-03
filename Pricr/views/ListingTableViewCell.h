@@ -9,6 +9,8 @@
 #import "Listing.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@import Parse;
+
 
 @interface ListingTableViewCell : UITableViewCell
 - (void)updateWithInfo:(Listing *)lstng;

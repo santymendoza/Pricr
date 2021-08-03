@@ -135,8 +135,14 @@
     if ([self isFavorited:self.item.favoriters]){
         [self.favoriteButton setSelected:TRUE];
     }
-    Listing *new = self.item[@"prices"][0];
-    self.itemPrice.text = new.price;
+    NSMutableArray *arrOfPrices = [NSMutableArray new];
+    
+    for(Listing *lstng in self.item[@"prices"]){
+        CGFloat strFloat = (CGFloat)[lstng.price floatValue];
+        [arrOfPrices addObject: [NSNumber numberWithFloat:strFloat]];
+    }
+    NSNumber *min=[arrOfPrices valueForKeyPath:@"@min.self"];
+    self.itemPrice.text = [@"$" stringByAppendingString:[NSString stringWithFormat:@"%@", min]];
     [self.itemImage loadInBackground];
 }
 - (void) getItem{

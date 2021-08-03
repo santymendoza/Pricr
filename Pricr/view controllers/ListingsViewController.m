@@ -75,12 +75,14 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 
-//    Listing *lstng = self.arrayOfListings[indexPath.row];
-//    self.coordinate = CLLocationCoordinate2DMake([lstng.venue[@"location"][@"lat"] floatValue], [lstng.venue[@"location"][@"lng"] floatValue]);
-//    CLLocationDistance regionDist = 1000;
-//    MKCoordinateRegion regionSpan = MKCoordinateRegionMakeWithDistance(self.coordinate, regionDist, regionDist);
-////    NSString *options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate:regionSpan.center)];
-//    CLPlacemark *place = [CLPlacemark new];
+    Listing *lstng = self.arrayOfListings[indexPath.row];
+    NSString *urlStart = @"http://maps.apple.com/?saddr=Current%20Location&daddr=";
+    NSString* directionsURL = [NSString stringWithFormat:@"%@%f,%f",urlStart,[lstng.venue[@"location"][@"lat"] floatValue], [lstng.venue[@"location"][@"lng"] floatValue]];
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: directionsURL] options:@{} completionHandler:^(BOOL success) {}];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: directionsURL]];
+    }
 }
     
 /*

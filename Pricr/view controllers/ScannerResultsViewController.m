@@ -18,7 +18,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *itemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 @property (strong, nonatomic) NSArray *itemCategories;
+@property (strong, nonatomic) NSArray *arrayOfItems;
 @property (strong, nonatomic) NSString *searchTitle;
+@property (strong, nonatomic) Item *otherItem;
+
 
 
 @end
@@ -26,6 +29,7 @@
 @implementation ScannerResultsViewController
 
 - (void)viewDidLoad {
+    [self getData];
     [super viewDidLoad];
     [self fetchItem];
     
@@ -43,25 +47,63 @@
 }
 
 
+- (void) getData {
+    // construct PFQuery
+    PFQuery *itemQuery = [PFQuery queryWithClassName:@"Item"];
+    [itemQuery orderByDescending:@"createdAt"];
+    [itemQuery includeKey:@"author"];
+    [itemQuery includeKey:@"prices"];
+    itemQuery.limit = 20;
+
+    // fetch data asynchronously
+    [itemQuery findObjectsInBackgroundWithBlock:^(NSArray<Item *> * _Nullable items, NSError * _Nullable error) {
+        if (items) {
+            
+            self.arrayOfItems = items;
+        }
+        else {
+            // handle error
+        }
+    }];
+}
+
 - (IBAction)postPressed:(id)sender {
-    NSMutableArray *arrOfPrices = [NSMutableArray new];
-    NSMutableArray *favoriters = [NSMutableArray new];
+    BOOL alreadyItem = FALSE;
+    for (Item *item in self.arrayOfItems){
+        if ([item.name isEqual:self.itemName.text]){
+            alreadyItem = TRUE;
+            self.otherItem = item;
+        }
+    }
     Listing *newListing = [Listing new];
     newListing.price = self.itemPrice.text;
     newListing.venue = self.venue;
     newListing.name = self.itemName.text;
     newListing.image= [self getPFFileFromImage:self.itemImage.image];
     newListing.author = PFUser.currentUser;
-    [arrOfPrices addObject:newListing];
-    
-    [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withSearchTitle:self.searchTitle withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"successfully uploaded an item!");
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else{
-            NSLog(@"did not post image!");
-        }
-    } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters withCategories:self.itemCategories];
+    if (alreadyItem){
+        NSMutableArray *newArray = self.otherItem.prices;
+        
+        [newArray addObject:newListing];
+        self.otherItem.prices = newArray;
+        [self.otherItem saveInBackground];
+        
+    }
+    else{
+        NSMutableArray *arrOfPrices = [NSMutableArray new];
+        NSMutableArray *favoriters = [NSMutableArray new];
+        [arrOfPrices addObject:newListing];
+        
+        [Item postUserItem:self.itemImage.image withDescription:self.itemDescription.text withSearchTitle:self.searchTitle withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"successfully uploaded an item!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else{
+                NSLog(@"did not post image!");
+            }
+        } withName:self.itemName.text withPrices:arrOfPrices withFavoriters:favoriters withCategories:self.itemCategories];
+    }
+
 
     [self dismissViewControllerAnimated:YES completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -104,15 +146,6 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
-//               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Device not connected to internet" preferredStyle:UIAlertControllerStyleAlert];
-//               UIAlertAction *okPressed = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                   NSLog(@"OK?");
-//               }];
-//               [alert addAction:okPressed];
-//               [self presentViewController:alert animated:YES completion:^{
-//                   // optional code for what happens after the alert controller has finished presenting
-//                   [self fetchMovies];
-//               }];
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
