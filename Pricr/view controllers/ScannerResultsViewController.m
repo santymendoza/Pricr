@@ -83,7 +83,6 @@
     newListing.author = PFUser.currentUser;
     if (alreadyItem){
         NSMutableArray *newArray = self.otherItem.prices;
-        
         [newArray addObject:newListing];
         self.otherItem.prices = newArray;
         [self.otherItem saveInBackground];

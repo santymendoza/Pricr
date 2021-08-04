@@ -34,9 +34,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.user fetch];
     self.user = PFUser.currentUser;
     self.name.text = self.user.username;
-    self.pointsLabel.text = self.user[@"name"];
+    self.pointsLabel.text = [NSString stringWithFormat:@"%@", self.user[@"points"]];
     self.profilePic.file = self.user[@"profilePic"];
     self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width * .5;
     self.profilePic.clipsToBounds = YES;
@@ -122,7 +123,8 @@ static NSString * const reuseIdentifier = @"Cell";
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ItemCollectionViewCell" forIndexPath:indexPath];
     
     Item *item = self.arrayOfItems[indexPath.item];
-    
+    cell.contentView.layer.cornerRadius = 10;
+    cell.contentView.layer.masksToBounds = YES;
     [cell setItem:item];
     
     return cell;

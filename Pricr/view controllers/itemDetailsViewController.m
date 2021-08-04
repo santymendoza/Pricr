@@ -214,6 +214,7 @@
     
     Item *item = self.arrayOfItems[indexPath.item];
     
+    
     [cell setItem:item];
     
     return cell;
@@ -227,8 +228,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    ListingsViewController *listingView = [segue destinationViewController];
-    listingView.item = self.item;
+    UITableView *tappedCell = sender;
+    NSIndexPath *indexPath = [self.relatedItemsCollection indexPathForCell: tappedCell];
+    NSDictionary *item = self.arrayOfItems[indexPath.item];
+    
+    itemDetailsViewController *detailViewController = [segue destinationViewController];
+    detailViewController.item = item;
 }
 
 /*

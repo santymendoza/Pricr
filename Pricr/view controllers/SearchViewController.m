@@ -84,7 +84,6 @@ static NSString * const reuseIdentifier = @"Cell";
         if (items) {
             
             self.arrayOfItems = items;
-            //[self eliminateListings];
             self.filteredItems = self.arrayOfItems;
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
@@ -147,6 +146,10 @@ static NSString * const reuseIdentifier = @"Cell";
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ItemCollectionViewCell" forIndexPath:indexPath];
     
     Item *item = self.filteredItems[indexPath.item];
+    
+    cell.contentView.layer.cornerRadius = 10;
+    cell.contentView.layer.masksToBounds = YES;
+
     
     [cell setItem:item];
     

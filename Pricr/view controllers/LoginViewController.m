@@ -38,12 +38,16 @@
     self.passwordField.placeholder = @"Password";
     self.passwordField.detail = @"At least 8 characters";
     self.passwordField.clearButtonMode = self.passwordField.isEditing;
+    self.passwordField.textColor = Color.whiteColor;
+    self.passwordField.backgroundColor = Color.darkGrayColor;
     self.passwordField.isVisibilityIconButtonEnabled = true;
         // Setting the visibilityIconButton color.
 }
 
 - (void) prepareUsernameField {
     self.usernameField.placeholder = @"Username";
+    self.usernameField.textColor = Color.whiteColor;
+    self.usernameField.backgroundColor = Color.darkGrayColor;
     self.usernameField.isClearIconButtonEnabled = TRUE;
     self.usernameField.clearButtonMode = self.usernameField.isEditing;
 }
