@@ -20,6 +20,7 @@
 		F98C950F26A2361900FCB7D7 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C950E26A2361900FCB7D7 /* Listing.m */; };
 		F98C951226A7687E00FCB7D7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C951126A7687E00FCB7D7 /* SearchViewController.m */; };
 		F98C951526AF7A9900FCB7D7 /* RelatedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C951426AF7A9900FCB7D7 /* RelatedCollectionViewCell.m */; };
+		F99C7E3E26BB4466008658F9 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99C7E3D26BB4466008658F9 /* ReviewViewController.m */; };
 		F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0392269C9FFA00844377 /* AppDelegate.m */; };
 		F9CC0396269C9FFA00844377 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0395269C9FFA00844377 /* SceneDelegate.m */; };
 		F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0398269C9FFA00844377 /* LoginViewController.m */; };
@@ -86,6 +87,8 @@
 		F98C951126A7687E00FCB7D7 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		F98C951326AF7A9900FCB7D7 /* RelatedCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RelatedCollectionViewCell.h; sourceTree = "<group>"; };
 		F98C951426AF7A9900FCB7D7 /* RelatedCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RelatedCollectionViewCell.m; sourceTree = "<group>"; };
+		F99C7E3C26BB4466008658F9 /* ReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		F99C7E3D26BB4466008658F9 /* ReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		F9CC038E269C9FFA00844377 /* Pricr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pricr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CC0391269C9FFA00844377 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9CC0392269C9FFA00844377 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				F9CC03E0269E429700844377 /* ScannerViewController.m */,
 				F97413DA26B868A700AFCA56 /* ListingsViewController.h */,
 				F97413DB26B868A700AFCA56 /* ListingsViewController.m */,
+				F99C7E3C26BB4466008658F9 /* ReviewViewController.h */,
+				F99C7E3D26BB4466008658F9 /* ReviewViewController.m */,
 			);
 			path = "view controllers";
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				F9CC03DE269E0B9A00844377 /* ManualCreateViewController.m in Sources */,
 				F98C950326A1F00F00FCB7D7 /* ItemMapViewController.m in Sources */,
 				F98C950C26A1FA5100FCB7D7 /* PhotoAnnotation.m in Sources */,
+				F99C7E3E26BB4466008658F9 /* ReviewViewController.m in Sources */,
 				F98C950026A0C1CD00FCB7D7 /* itemDetailsViewController.m in Sources */,
 				F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */,
 				F9CC03D3269CE7C800844377 /* ProfileViewController.m in Sources */,
