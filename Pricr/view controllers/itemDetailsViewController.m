@@ -17,12 +17,18 @@
 #import <WebKit/WebKit.h>
 #import "ListingsViewController.h"
 #import "ReviewViewController.h"
+#import "Review.h"
 
 @interface itemDetailsViewController () <UICollectionViewDelegate,UICollectionViewDataSource, WKNavigationDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *starThree;
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
+@property (weak, nonatomic) IBOutlet UIButton *starFour;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIButton *starTwo;
+@property (weak, nonatomic) IBOutlet UIButton *starFive;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 @property (weak, nonatomic) IBOutlet UILabel *itemDescription;
+@property (weak, nonatomic) IBOutlet UIButton *starOne;
 @property (weak, nonatomic) IBOutlet UICollectionView *relatedItemsCollection;
 @property (weak, nonatomic) IBOutlet UILabel *itemPrice;
 @property (strong,nonatomic) NSArray *arrayOfItems;
@@ -77,6 +83,8 @@
     [self makeDetails];
     self.relatedItemsCollection.delegate = self;
     self.relatedItemsCollection.dataSource = self;
+    
+    [self getItemRating];
     
     
     //layout stuff
@@ -171,6 +179,56 @@
     }];
 }
 
+- (void) setStarRating:(float)avgRating{
+    if (avgRating >= 1.0){
+        [self.starOne setSelected:TRUE];
+    }
+    if (avgRating >= 2.0){
+        [self.starTwo setSelected:TRUE];
+    }
+    else if(avgRating >= 1.5){
+        [self.starTwo setHighlighted:TRUE];
+    }
+    if (avgRating >= 3.0){
+        [self.starThree setSelected:TRUE];
+    }
+    else if(avgRating >= 2.5){
+        [self.starThree setHighlighted:TRUE];
+    }
+    if (avgRating >= 4.0){
+        [self.starFour setSelected:TRUE];
+    }
+    else if(avgRating >= 3.5){
+        [self.starFour setHighlighted:TRUE];
+    }
+    if (avgRating >= 5.0){
+        [self.starFive setSelected:TRUE];
+    }
+    else if(avgRating >= 4.5){
+        [self.starFive setHighlighted:TRUE];
+    }
+}
+- (void) getItemRating{
+    NSMutableArray *arrOfRatings = [NSMutableArray new];
+    PFQuery *reviewQuery = [PFQuery queryWithClassName:@"Review"];
+    [reviewQuery orderByDescending:@"createdAt"];
+    [reviewQuery whereKey:@"item" equalTo: self.item];
+    reviewQuery.limit = 20;
+    // fetch data asynchronously
+    [reviewQuery findObjectsInBackgroundWithBlock:^(NSArray<Review *> * _Nullable reviews, NSError * _Nullable error) {
+        if (reviews) {
+            for (Review *review in reviews) {
+                [arrOfRatings addObject:review.numStars];
+            }
+            [self setStarRating:[[arrOfRatings valueForKeyPath:@"@avg.self"] floatValue]];
+            
+        }
+        else {
+        }
+    }];
+    
+    
+}
 - (void) getRelatedItems{
     NSUInteger sizeOfArray = 3;
     NSMutableArray *relatedItems = [NSMutableArray array];

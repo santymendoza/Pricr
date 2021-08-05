@@ -6,6 +6,7 @@
 //
 
 #import "Review.h"
+#import "Item.h"
 
 @implementation Review
 
@@ -14,6 +15,7 @@
 @dynamic numStars;
 @dynamic objectId;
 @dynamic date;
+@dynamic item;
 
 
 
@@ -24,10 +26,11 @@
     return @"Review";
 }
 
-+ (void) postReview: ( NSNumber * _Nullable )numStars review: (NSString * _Nullable)review date: (NSString * _Nullable)date  withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postReview: ( NSNumber * _Nullable )numStars item: (Item * _Nullable)item review: (NSString * _Nullable)review date: (NSString * _Nullable)date  withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Review *newReview= [Review new];
     newReview.review = review;
     newReview.date = date;
+    newReview.item = item;
     newReview.numStars = numStars;
     newReview.reviewer =  [PFUser currentUser];
 

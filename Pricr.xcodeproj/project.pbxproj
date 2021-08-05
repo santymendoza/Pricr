@@ -22,6 +22,7 @@
 		F98C951526AF7A9900FCB7D7 /* RelatedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F98C951426AF7A9900FCB7D7 /* RelatedCollectionViewCell.m */; };
 		F99C7E3E26BB4466008658F9 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99C7E3D26BB4466008658F9 /* ReviewViewController.m */; };
 		F99C7E4426BC4CC0008658F9 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = F99C7E4326BC4CC0008658F9 /* Review.m */; };
+		F99C7E4726BC6452008658F9 /* ReviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99C7E4626BC6452008658F9 /* ReviewViewCell.m */; };
 		F9CC0393269C9FFA00844377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0392269C9FFA00844377 /* AppDelegate.m */; };
 		F9CC0396269C9FFA00844377 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0395269C9FFA00844377 /* SceneDelegate.m */; };
 		F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC0398269C9FFA00844377 /* LoginViewController.m */; };
@@ -92,6 +93,8 @@
 		F99C7E3D26BB4466008658F9 /* ReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		F99C7E4226BC4CC0008658F9 /* Review.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		F99C7E4326BC4CC0008658F9 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
+		F99C7E4526BC6452008658F9 /* ReviewViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewViewCell.h; sourceTree = "<group>"; };
+		F99C7E4626BC6452008658F9 /* ReviewViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewViewCell.m; sourceTree = "<group>"; };
 		F9CC038E269C9FFA00844377 /* Pricr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pricr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CC0391269C9FFA00844377 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9CC0392269C9FFA00844377 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				F98C950826A1F7EB00FCB7D7 /* LocationViewCell.m */,
 				F97413DD26B86C4700AFCA56 /* ListingTableViewCell.h */,
 				F97413DE26B86C4700AFCA56 /* ListingTableViewCell.m */,
+				F99C7E4526BC6452008658F9 /* ReviewViewCell.h */,
+				F99C7E4626BC6452008658F9 /* ReviewViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				F9CC0399269C9FFA00844377 /* LoginViewController.m in Sources */,
 				F98C951226A7687E00FCB7D7 /* SearchViewController.m in Sources */,
 				F9CC03DE269E0B9A00844377 /* ManualCreateViewController.m in Sources */,
+				F99C7E4726BC6452008658F9 /* ReviewViewCell.m in Sources */,
 				F98C950326A1F00F00FCB7D7 /* ItemMapViewController.m in Sources */,
 				F98C950C26A1FA5100FCB7D7 /* PhotoAnnotation.m in Sources */,
 				F99C7E3E26BB4466008658F9 /* ReviewViewController.m in Sources */,

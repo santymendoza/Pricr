@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *favoriters;
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSMutableArray *relatedItems;
+@property (nonatomic, strong) NSMutableArray *reviews;
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) PFFileObject *image;
 

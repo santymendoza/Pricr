@@ -20,6 +20,8 @@
 @dynamic categories;
 @dynamic relatedItems;
 @dynamic searchTitle;
+@dynamic reviews;
+
 
 
 
@@ -37,6 +39,7 @@
     newItem.description = description;
     newItem.prices = prices;
     newItem.categories = categories;
+    newItem.reviews = [NSMutableArray new];
     newItem.relatedItems = [self setRelatedItems:newItem];
     newItem.searchTitle = searchTitle;
     [self setItemAsSimilar:newItem];

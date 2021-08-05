@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "PFObject.h"
+#import "Item.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,9 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) PFUser *reviewer;
 @property (nonatomic,strong) NSString *date;
 @property (nonatomic,strong) NSString *objectId;
+@property (nonatomic,strong) Item *item;
 
 
-+ (void) postReview: ( NSNumber * _Nullable )numStars review: (NSString * _Nullable)review date: (NSString * _Nullable)date  withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
++ (void) postReview: ( NSNumber * _Nullable )numStars item: (Item * _Nullable)item review: (NSString * _Nullable)review date: (NSString * _Nullable)date  withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
