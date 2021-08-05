@@ -9,6 +9,8 @@
 #import "Item.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@import Parse;
+
 
 @interface ReviewViewController : UIViewController
 @property (strong,nonatomic) Item *item;
