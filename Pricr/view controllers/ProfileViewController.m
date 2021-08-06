@@ -37,7 +37,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.user fetch];
     self.user = PFUser.currentUser;
     self.name.text = self.user.username;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%@", self.user[@"points"]];
     self.profilePic.file = self.user[@"profilePic"];
     self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width * .5;
     self.profilePic.clipsToBounds = YES;
@@ -96,6 +95,7 @@ static NSString * const reuseIdentifier = @"Cell";
         if (items) {
             self.arrayOfItems = items;
             self.numItemsLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfItems.count];
+            self.pointsLabel.text = [NSString stringWithFormat:@"%.f",[[NSNumber numberWithInt: self.arrayOfItems.count] floatValue] * 25.0];
             [self.itemCollectionView reloadData];
             [self.refreshControl endRefreshing];
         }

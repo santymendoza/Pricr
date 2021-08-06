@@ -232,6 +232,7 @@ calloutAccessoryControlTapped:(UIControl *)control{
        // NSLog(sender);
         itemDetailsViewController *dc = segue.destinationViewController;
         dc.listing = sender.listing;
+        dc.fromMap = @"yes";
         
     }
 }

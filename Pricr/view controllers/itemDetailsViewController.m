@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *starThree;
 @property (weak, nonatomic) IBOutlet PFImageView *itemImage;
 @property (weak, nonatomic) IBOutlet UIButton *starFour;
+@property (weak, nonatomic) IBOutlet UILabel *numReviewLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIButton *starTwo;
 @property (weak, nonatomic) IBOutlet UIButton *starFive;
@@ -84,8 +85,9 @@
     self.relatedItemsCollection.delegate = self;
     self.relatedItemsCollection.dataSource = self;
     
-    [self getItemRating];
-    
+    if(![self.fromMap isEqual:@"yes"]){
+        [self getItemRating];
+    }
     
     //layout stuff
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.relatedItemsCollection.collectionViewLayout;
@@ -170,6 +172,8 @@
                     if ([listing[@"name"] isEqual: self.listing[@"name"]]){
                         self.item = item;
                         [self makeDetails];
+                        [self getItemRating];
+
                     }
                 }
             }
@@ -179,7 +183,7 @@
     }];
 }
 
-- (void) setStarRating:(float)avgRating{
+- (void) setStarRating:(float)avgRating {
     if (avgRating >= 1.0){
         [self.starOne setSelected:TRUE];
     }
@@ -221,6 +225,8 @@
                 [arrOfRatings addObject:review.numStars];
             }
             [self setStarRating:[[arrOfRatings valueForKeyPath:@"@avg.self"] floatValue]];
+            
+            self.numReviewLabel.text = [NSString stringWithFormat:@"(%i)", arrOfRatings.count];
             
         }
         else {

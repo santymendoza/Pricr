@@ -86,6 +86,7 @@
         [newArray addObject:newListing];
         self.otherItem.prices = newArray;
         [self.otherItem saveInBackground];
+        [PFUser.currentUser saveInBackground];
         
     }
     else{

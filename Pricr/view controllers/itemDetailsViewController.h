@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic) Item *item;
 @property (strong,nonatomic) Listing *listing;
 @property (strong,nonatomic) NSString *itemID;
+@property (strong,nonatomic) NSString *fromMap;
+
 
 
 
