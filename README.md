@@ -14,7 +14,6 @@ Original App Design Project - README Template
 Price Huntr is an app designed to make finding the cheaptest products at all stores using a user updated database with prices. 
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
 - **Category:** Lifestyle
 - **Mobile:** Mobile is necessary for the app because it serves as the price scanner that the user will use at the store. Has to be easily accesible. 
 - **Story:** Highlights the best financial options for grocery shopping or everyday items. No more going from store to store. 
